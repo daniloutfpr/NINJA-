@@ -1,0 +1,3 @@
+--------INCLUDES JOGO-----------
+
+Coord->Entidade->Personagem->jogador->inimigo->gerenciador grafico->obstaculo->principal
