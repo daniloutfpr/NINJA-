@@ -5,13 +5,13 @@ namespace Entidades {
 		class Personagem : public Entidade
 		{
 		protected:
-			sf::RectangleShape corpo;
 			Math::CoordF vel;
 		public:
-			Personagem(const sf::Vector2f pos, const sf::Vector2f tam);
+			Personagem(const sf::Vector2f pos, const sf::Vector2f tam,ID id=ID::vazio);
 			~Personagem();
-			const sf::RectangleShape& getCorpo() const;
-			virtual void executar() = 0;
+			//const sf::RectangleShape& getCorpo() const;
+			virtual void mover() = 0;
+			virtual void executar() = 0 ;
 
 		};
 	}

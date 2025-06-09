@@ -1,19 +1,16 @@
 #include "Obstaculo.h"
 namespace Entidades {
 	namespace Obstaculos {
-		Obstaculo::Obstaculo(const sf::Vector2f pos, const sf::Vector2f tam):Entidade(pos,tam),
-			obstaculo1(sf::RectangleShape(tam))
+		Obstaculo::Obstaculo( sf::Vector2f pos, sf::Vector2f tam,ID id):Entidade(pos,tam,id)
+			
 		{
-			obstaculo1.setPosition(pos);
+			corpo->setPosition(pos);
 			inicializa();
 		}
 		Obstaculo::~Obstaculo(){}
-		const sf::RectangleShape& Obstaculo:: getObs()  {
-			return obstaculo1;
-		}
 
 		void Obstaculo:: inicializa() {
-			obstaculo1.setFillColor(sf::Color::Blue);
+			corpo->setFillColor(sf::Color::Blue);
 		}
 	}
 }

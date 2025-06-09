@@ -9,8 +9,9 @@ namespace Entidades {
 			Entidades::Personagens::Jogador* jogador;
 			void inicializa();
 		public:
-			Inimigo(sf::Vector2f pos, sf::Vector2f tam,Entidades::Personagens::Jogador* j);
+			Inimigo(sf::Vector2f pos, sf::Vector2f tam,Entidades::Personagens::Jogador* j,ID id=ID::inimigo);
 			~Inimigo();
+			void mover();
 			void executar();
 		};
 	}

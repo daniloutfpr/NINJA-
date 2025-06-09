@@ -1,14 +1,15 @@
 #pragma once
 #include<iostream>
 #include<SFML/Graphics.hpp>
-#include "Obstaculo.h"
+#include "Plataforma.h"
 using namespace std;
-namespace Brasil {
+namespace Ninja {
 	class Principal
 	{
 	private:
 		//sf::RenderWindow window;
-		Entidades::Obstaculos::Obstaculo obstacul;
+		//Entidades::Obstaculos::Obstaculo obstacul;
+		//Entidades::Obstaculos::Plataforma plat;
 		std::vector<Entidades::Personagens::Personagem*> personagens;
 		Gerenciadores::GerenciadorGrafico* pGrafico;
 	public:

@@ -6,7 +6,7 @@ namespace Gerenciadores {
 
 	GerenciadorGrafico::GerenciadorGrafico() :
 		camera(sf::Vector2f(LARGURA_JANELA / 2, ALTURA_JANELA / 2), sf::Vector2f(LARGURA_JANELA, ALTURA_JANELA)) {
-		pJanela = new sf::RenderWindow(sf::VideoMode(LARGURA_JANELA, ALTURA_JANELA), "Brasil++");
+		pJanela = new sf::RenderWindow(sf::VideoMode(LARGURA_JANELA, ALTURA_JANELA), "Ninja++");
 		pJanela->setView(camera);
 		relogio.restart();
 		dt = relogio.getElapsedTime().asSeconds();
@@ -25,8 +25,8 @@ namespace Gerenciadores {
 		return pGrafico;
 	}
 
-	void GerenciadorGrafico::renderizar(const sf::RectangleShape& corpo) {
-		pJanela->draw(corpo);
+	void GerenciadorGrafico::renderizar( sf::RectangleShape* corpo) {
+		pJanela->draw(*corpo);
 	}
 
 	void GerenciadorGrafico::display() {

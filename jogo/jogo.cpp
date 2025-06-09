@@ -3,5 +3,5 @@
 #include "Principal.h"
 int main()
 {
-	Brasil::Principal p;
+	Ninja::Principal p;
 }

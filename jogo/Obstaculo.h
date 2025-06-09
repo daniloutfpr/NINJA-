@@ -1,18 +1,18 @@
 #pragma once
-#include "GerenciadorGrafico.h"
+#include "Inimigo.h"
 namespace Entidades {
 	namespace Obstaculos {
 		class Obstaculo:public Entidade
 		{
 		private:
-			sf::RectangleShape obstaculo1;
+			//sf::RectangleShape *obstaculo1;
 			void inicializa();
 		public:
-			Obstaculo(const sf::Vector2f pos, const sf::Vector2f tam);
-			~Obstaculo();
-			const sf::RectangleShape& getObs();
-
+			Obstaculo(sf::Vector2f pos,sf::Vector2f tam,ID id = ID::vazio);
+			virtual ~Obstaculo();
+			//sf::RectangleShape* getObs();
 			virtual void obstaculizar() = 0;
+			virtual void executar() = 0;
 		};
 	}
 }

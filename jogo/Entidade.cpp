@@ -1,9 +1,13 @@
 #include "Entidade.h"
 
 namespace Entidades {
-	Entidade::Entidade(const sf::Vector2f pos, const sf::Vector2f tam):posicao(pos),tamanho(tam)
+	Entidade::Entidade(const sf::Vector2f pos, const sf::Vector2f tam,ID id):Ente(id),posicao(pos),tamanho(tam)
 	{}
 	Entidade::~Entidade(){}
+
+	void Entidade::renderiza() {
+		pGrafico->renderizar(corpo);
+	}
 
 	sf::Vector2f Entidade::getPos()const{
 		return posicao;

@@ -1,5 +1,5 @@
 #pragma once
-#include "Inimigo.h"
+#include "Coord.h"
 //gerenciador grafico deve ser singleton por eu querer apenas uma instancia dele no meu jogo 
 //(Isaaque) estudar esse padrao de projeto depois
 
@@ -23,7 +23,7 @@ namespace Gerenciadores {
 	public:
 		~GerenciadorGrafico();
 		static GerenciadorGrafico* getInstancia();
-		void renderizar(const sf::RectangleShape& corpo);
+		void renderizar(sf::RectangleShape* corpo);
 		void display();
 		bool janelaAberta()const ;
 		void limpar();	
