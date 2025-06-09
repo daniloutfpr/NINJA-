@@ -1,5 +1,4 @@
-#ifndef LISTA_H
-#define LISTA_H
+#pragma once
 
 template <class TL>
 class Lista {
@@ -38,5 +37,3 @@ public:
     Elemento<TL>* getPrimeiro() const { return pPrimeiro; }
     Elemento<TL>* getUltimo() const { return pUltimo; }
 };
-
-#endif
