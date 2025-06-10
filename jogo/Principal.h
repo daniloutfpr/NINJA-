@@ -9,8 +9,9 @@ namespace Ninja {
 	private:
 		//sf::RenderWindow window;
 		//Entidades::Obstaculos::Obstaculo obstacul;
-		//Entidades::Obstaculos::Plataforma plat;
-		std::vector<Entidades::Personagens::Personagem*> personagens;
+		Entidades::Obstaculos::Plataforma plat;
+		Lista::ListaDeEntidades* entidadesM;
+		Lista::ListaDeEntidades* entidadesE;
 		Gerenciadores::GerenciadorGrafico* pGrafico;
 	public:
 		Principal();

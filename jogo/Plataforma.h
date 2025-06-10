@@ -5,6 +5,7 @@ namespace Entidades {
 		class Plataforma : public Obstaculo {
 		private:
 			sf::Vector2f empuxo;
+			void inicializa();
 		public:
 			Plataforma(sf::Vector2f pos, sf::Vector2f tam, ID id = ID::plataforma);
 			~Plataforma();

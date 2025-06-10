@@ -1,125 +1,128 @@
 #include <iostream>
+#include "Entidade.h"
+#include <cstddef> // Para nullptr
 
-template <class T>
-class List {
-private:
-    // Classe interna Node
-    struct Node {
-        T data;           // Armazena o valor diretamente
-        Node* next;       // Ponteiro para o próximo nó
-        Node* prev;       // Ponteiro para o nó anterior
+namespace Lista {
 
-        Node(const T& value) : data(value), next(nullptr), prev(nullptr) {}
-    };
-
-    Node* head;  // Início da lista
-    Node* tail;  // Fim da lista
-    int size;    // Tamanho da lista
-
-public:
-    // Classe iteradora
-    class iterator {
+    template <typename T>
+    class Lista {
     private:
-        Node* current;  // Ponteiro para o nó atual
+        // Classe interna Node (nó)
+        struct Elemento {
+            T data;
+            Elemento* proximo;
+            Elemento* anterior;
+
+            Elemento(const T& valor) : data(valor), proximo(nullptr), anterior(nullptr) {}
+        };
+
+        Elemento* inicio; // Primeiro elemento da lista
+        Elemento* fim;    // Último elemento da lista
+        size_t tamanho;   // Quantidade de elementos na lista
+
     public:
-        explicit iterator(Node* node = nullptr) : current(node) {}
+        // Classe Iterator aninhada (Iterator)
+        class Iterator {
+        private:
+            Elemento* atual;
 
-        // Operador de desreferenciação
-        T& operator*() const {
-            return current->data;
+        public:
+            explicit Iterator(Elemento* elemento = nullptr) : atual(elemento) {}
+
+            T& operator*() const { return atual->data; }
+
+            Iterator& operator++() {
+                atual = atual->proximo;
+                return *this;
+            }
+
+            Iterator operator++(int) {
+                Iterator temp = *this;
+                ++(*this);
+                return temp;
+            }
+
+            Iterator& operator--() {
+                atual = atual->anterior;
+                return *this;
+            }
+
+            Iterator operator--(int) {
+                Iterator temp = *this;
+                --(*this);
+                return temp;
+            }
+
+            bool operator==(const Iterator& outro) const { return atual == outro.atual; }
+            bool operator!=(const Iterator& outro) const { return atual != outro.atual; }
+        };
+
+        // Construtor
+        Lista() : inicio(nullptr), fim(nullptr), tamanho(0) {}
+
+        // Destrutor
+        ~Lista() { limpar(); }
+
+        // Adiciona um novo elemento ao final da lista
+        void incluir(const T& valor) {
+            Elemento* novoElemento = new Elemento(valor);
+            if (fim) {
+                fim->proximo = novoElemento;
+                novoElemento->anterior = fim;
+                fim = novoElemento;
+            }
+            else {
+                inicio = fim = novoElemento;
+            }
+            tamanho++;
         }
 
-        // Operador de incremento prefixado
-        iterator& operator++() {
-            current = current->next;
-            return *this;
+        // Remove um elemento da lista
+        void remover(const T& valor) {
+            Elemento* atual = inicio;
+            while (atual && atual->data != valor) {
+                atual = atual->proximo;
+            }
+
+            if (atual) {
+                if (atual == inicio) {
+                    inicio = inicio->proximo;
+                    if (inicio) inicio->anterior = nullptr;
+                }
+                else if (atual == fim) {
+                    fim = fim->anterior;
+                    if (fim) fim->proximo = nullptr;
+                }
+                else {
+                    atual->anterior->proximo = atual->proximo;
+                    atual->proximo->anterior = atual->anterior;
+                }
+                delete atual;
+                tamanho--;
+            }
         }
 
-        // Operador de decremento prefixado
-        iterator& operator--() {
-            current = current->prev;
-            return *this;
+        // Remove todos os elementos da lista
+        void limpar() {
+            Elemento* atual = inicio;
+            while (atual) {
+                Elemento* proximo = atual->proximo;
+                delete atual;
+                atual = proximo;
+            }
+            inicio = fim = nullptr;
+            tamanho = 0;
         }
 
-        // Operador de igualdade
-        bool operator==(const iterator& other) const {
-            return current == other.current;
-        }
+        // Retorna a quantidade de elementos na lista
+        size_t getTamanho() const { return tamanho; }
 
-        // Operador de desigualdade
-        bool operator!=(const iterator& other) const {
-            return current != other.current;
-        }
+        // Iterator
+        Iterator begin() { return Iterator(inicio); }
+        Iterator end() { return Iterator(nullptr); }
 
-        // Acesso ao nó atual (para métodos como getData ou setData)
-        Node* getNode() const {
-            return current;
-        }
+        Iterator rbegin() { return Iterator(fim); }
+        Iterator rend() { return Iterator(nullptr); }
     };
+}
 
-    // Construtor
-    List() : head(nullptr), tail(nullptr), size(0) {}
-
-    // Destrutor
-    ~List() {
-        clear();
-    }
-
-    // Adiciona um elemento ao final da lista
-    void push_back(const T& value) {
-        Node* newNode = new Node(value);
-        if (tail == nullptr) {
-            head = tail = newNode;
-        }
-        else {
-            tail->next = newNode;
-            newNode->prev = tail;
-            tail = newNode;
-        }
-        size++;
-    }
-
-    // Limpa todos os elementos da lista
-    void clear() {
-        Node* current = head;
-        while (current != nullptr) {
-            Node* next = current->next;
-            delete current;
-            current = next;
-        }
-        head = tail = nullptr;
-        size = 0;
-    }
-
-    // Retorna o tamanho da lista
-    int getSize() const {
-        return size;
-    }
-
-    // Métodos de acesso/modificação de dados no nó
-    T getData(iterator it) const {
-        if (it.getNode()) {
-            return it.getNode()->data;
-        }
-        throw std::out_of_range("Iterator inválido");
-    }
-
-    void setData(iterator it, const T& value) {
-        if (it.getNode()) {
-            it.getNode()->data = value;
-        }
-        else {
-            throw std::out_of_range("Iterator inválido");
-        }
-    }
-
-    // Retorna um iterador para o início da lista
-    iterator begin() {
-        return iterator(head);
-    }
-
-    // Retorna um iterador para o final da lista (nullptr)
-    iterator end() {
-        return iterator(nullptr);
-    }
-};

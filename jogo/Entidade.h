@@ -12,6 +12,8 @@ namespace Entidades {
 		void renderiza();
 		void setPosicao(sf::Vector2f p);
 		sf::Vector2f getPos()const;
+		Math::CoordF getPosition() const;
+		void setPos(Math::CoordF p);
 		void setTamanho(sf::Vector2f t);
 		sf::Vector2f getTamanho()const;
 		virtual void executar() = 0;

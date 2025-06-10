@@ -19,7 +19,17 @@ namespace Entidades {
 	void Entidade::setPosicao(sf::Vector2f p) {
 		posicao = p;
 	}
+
+	void Entidade::setPos(Math::CoordF p) {
+		posicao = sf::Vector2f(p.x, p.y);
+	}
+
 	void Entidade::setTamanho(sf::Vector2f t) {
 		tamanho = t;
 	}
+
+	Math::CoordF Entidade::getPosition() const {
+		return Math::CoordF(posicao.x,posicao.y); 
+	}
+
 }

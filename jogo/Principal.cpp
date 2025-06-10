@@ -1,24 +1,25 @@
 #include "Principal.h"
 
-Ninja::Principal::Principal() 
-	//obstacul(sf::Vector2f(0.0f,600.0f),sf::Vector2f(1000.0f,200.0f))
+Ninja::Principal::Principal():
+	plat(sf::Vector2f(0.0f, 600.0f), sf::Vector2f(1000.0f, 200.0f), plataforma)
+	
 	//window(sf::VideoMode(800.0f, 600.0f), "Brasil++")
 {
+	entidadesM = new Lista::ListaDeEntidades();
 	pGrafico = Gerenciadores::GerenciadorGrafico::getInstancia();
-	personagens.clear();
 	Entidades::Personagens::Jogador* j1 = new Entidades::Personagens::Jogador(sf::Vector2f(100.0f, 100.0f), sf::Vector2f(50.0f,50.0f),jogador);
 	Entidades::Personagens::Inimigo* i1 = new Entidades::Personagens::Inimigo(sf::Vector2f(200.0f, 200.0f), sf::Vector2f(50.0f, 50.0f),j1,inimigo);
 	Entidades::Personagens::Personagem* p1 = static_cast<Entidades::Personagens::Personagem*>(j1);
 	Entidades::Personagens::Personagem* p2 = static_cast<Entidades::Personagens::Personagem*>(i1);
 
-	personagens.push_back(p1);
-	personagens.push_back(p2);
+	entidadesM->adicionarEntidade(p1);
+	entidadesM->adicionarEntidade(p2);
 
 	executar();
 }
 
 Ninja::Principal::~Principal(){
-	personagens.clear();//isso vai ser mudado para uma lista de entidades moveis e estaticas
+	//isso vai ser mudado para uma lista de entidades moveis e estaticas
 }
 
 void Ninja:: Principal::executar(){
@@ -38,10 +39,10 @@ void Ninja:: Principal::executar(){
 		
 		pGrafico->limpar();
 		//pGrafico->renderizar(obstacul.getObs());
-		for (int i = 0; i < personagens.size(); i++) {
-
-			personagens[i]->renderiza();
-			personagens[i]->mover();
+		plat.renderiza();
+		for (auto itM = entidadesM->begin();itM!=entidadesM->end() ; itM++) {
+			(*itM)->renderiza();
+			(*itM)->executar();
 
 		}
 		//window.draw(jogador.getCorpo());
