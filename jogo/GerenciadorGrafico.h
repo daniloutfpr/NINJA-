@@ -13,6 +13,7 @@ namespace Gerenciadores {
 		sf::RenderWindow* pJanela;
 		sf::View camera;
 		//ainda vai ser necessario um mapa de texturas
+    std::map<std::string, sf::Texture*> texturas;
 		//e uma fonte
 		sf::Clock relogio;
 		static float dt;
@@ -20,6 +21,7 @@ namespace Gerenciadores {
 		//singleton
 		static Gerenciadores::GerenciadorGrafico* pGrafico;
 		GerenciadorGrafico();
+    
 	public:
 		~GerenciadorGrafico();
 		static GerenciadorGrafico* getInstancia();
@@ -35,6 +37,7 @@ namespace Gerenciadores {
 		Math::CoordUI getTamJanela() const;
 		sf::Vector2f getCentroCam() const;
 		sf::Vector2f getCameraPos() const;
+    sf::Texture* carregarTextura(const char* caminho);
 
 
 	};
