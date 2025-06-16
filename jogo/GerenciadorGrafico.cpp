@@ -81,5 +81,16 @@ namespace Gerenciadores {
 		return pJanela->getView().getCenter();
 	}
 
+  sf::Texture* GerenciadorGrafico::carregarTextura(const char* caminho) {
+	  if (texturas.count(caminho) > 0)
+		  return texturas[caminho];
 
+	  sf::Texture* textura = new sf::Texture();
+	  if (!textura->loadFromFile(caminho)) {
+		  std::cout << "Gerenciadores::GerenciadorGrafico::ERRO: TEXTURA NAO ENCONTRADA" << std::endl;
+		  return nullptr;
+	  }
+    texturas.emplace(caminho, textura);
+	  return textura;
+  }
 }
