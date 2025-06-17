@@ -1,3 +1,4 @@
 --------INCLUDES JOGO-----------
 
-Coord->GerenciadorGrafico->Ente->Entidade->Personagem->jogador->inimigo->obstaculo->gerenciador_de_colisoes->plataforma->principal
+Coord->GerenciadorGrafico->Ente->Entidade->Lista->ListaDeEntidades->gerenciador_de_colisoes->Personagem->jogador->
+inimigo->obstaculo->plataforma->principal

@@ -1,5 +1,5 @@
 #pragma once
-#include "GerenciadorDeColisoes.h"
+#include "Obstaculo.h"
 namespace Entidades {
 	namespace Obstaculos {
 		class Plataforma : public Obstaculo {

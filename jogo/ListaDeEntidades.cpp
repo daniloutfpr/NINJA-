@@ -31,6 +31,7 @@ namespace Lista{
 			Entidades::Entidade* e = *it;
 
 			if (e) {
+				e->renderiza();
 				e->executar();
 			}
 		}

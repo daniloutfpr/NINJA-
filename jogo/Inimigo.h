@@ -5,7 +5,7 @@ namespace Entidades {
 		class Inimigo :public Personagem
 		{
 		private:
-			
+			int nivel_maldade;
 			Entidades::Personagens::Jogador* jogador;
 			void inicializa();
 		public:

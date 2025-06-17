@@ -5,6 +5,7 @@ namespace Entidades {
 
 		Plataforma::Plataforma(sf::Vector2f pos, sf::Vector2f tam, ID id)
 			: Obstaculo(pos, tam, id), empuxo() {
+			//std::cout << "construto da plataforma!" << endl;
 			corpo = new sf::RectangleShape(tam);
 			inicializa();
 			corpo->setPosition(pos);
@@ -19,7 +20,7 @@ namespace Entidades {
 		}
 
 		void Plataforma::obstaculizar() {
-			
+
 		}
 
 		void Plataforma::executar() {

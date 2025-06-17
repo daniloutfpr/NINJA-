@@ -5,12 +5,10 @@ namespace Entidades {
 			
 		{
 			corpo->setPosition(pos);
-			inicializa();
+			//inicializa();
 		}
 		Obstaculo::~Obstaculo(){}
 
-		void Obstaculo:: inicializa() {
-			corpo->setFillColor(sf::Color::Blue);
-		}
+		
 	}
 }

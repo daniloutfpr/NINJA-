@@ -1,5 +1,11 @@
 #pragma once
-#include "Obstaculo.h"
+#include "ListaDeEntidades.h"
+
+namespace Entidades {
+	namespace Personagens {
+		class Personagem;
+	}
+}
 namespace Gerenciadores {
 	//gerenciador singleton
 	class GerenciadorDeColisoes

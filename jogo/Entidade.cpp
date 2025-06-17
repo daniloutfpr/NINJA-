@@ -1,23 +1,37 @@
 #include "Entidade.h"
 
+namespace Gerenciadores {
+	class GerenciadorDeColisoes;
+}
+
 namespace Entidades {
 	Entidade::Entidade(const sf::Vector2f pos, const sf::Vector2f tam,ID id):Ente(id),posicao(pos),tamanho(tam)
-	{}
-	Entidade::~Entidade(){}
+	{
+		//pColisao = Gerenciadores::GerenciadorDeColisoes::getInstancia();
+		corpo->setOrigin(tam.x / 2.0f, tam.y / 2.0f);
+		corpo->setPosition(posicao);
+	}
+	Entidade::~Entidade(){
+		//pColisao = Gerenciadores::GerenciadorDeColisoes::getInstancia();
+	}
 
 	void Entidade::renderiza() {
 		pGrafico->renderizar(corpo);
 	}
 
 	sf::Vector2f Entidade::getPos()const{
-		return posicao;
+		return corpo->getPosition();
 	}
 	sf::Vector2f Entidade::getTamanho()const {
 		return tamanho;
 	}
 
 	void Entidade::setPosicao(sf::Vector2f p) {
-		posicao = p;
+		this->posicao = p;
+
+		if (corpo) {
+			corpo->setPosition(this->posicao);
+		}
 	}
 
 	void Entidade::setPos(Math::CoordF p) {
@@ -29,7 +43,10 @@ namespace Entidades {
 	}
 
 	Math::CoordF Entidade::getPosition() const {
-		return Math::CoordF(posicao.x,posicao.y); 
+		if (corpo)
+			return Math::CoordF(corpo->getPosition().x, corpo->getPosition().y);
+		return Math::CoordF(0.f, 0.f); // fallback seguro
+
 	}
 
 }

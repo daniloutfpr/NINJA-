@@ -6,7 +6,8 @@ namespace Entidades {
 		{
 		private:
 			//sf::RectangleShape *obstaculo1;
-			void inicializa();
+			//void inicializa();
+			bool danoso;
 		public:
 			Obstaculo(sf::Vector2f pos,sf::Vector2f tam,ID id = ID::vazio);
 			virtual ~Obstaculo();

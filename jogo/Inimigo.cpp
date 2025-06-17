@@ -21,7 +21,7 @@ namespace Entidades {
 			sf::Vector2f posJogador = jogador->getPos();
 			sf::Vector2f posInimigo = corpo->getPosition();
 
-			if (fabs(posJogador.x - posInimigo.x) <= 200.0f && fabs(posJogador.y - posInimigo.y) <= 200.0f) 
+			if (fabs(posJogador.x - posInimigo.x) <= 1000.0f && fabs(posJogador.y - posInimigo.y) <= 1000.0f) 
 			{
 				if (posJogador.x - posInimigo.x > 0.0f) {
 					corpo->move(vel.x, 0.0f);
@@ -41,6 +41,7 @@ namespace Entidades {
 
 		void Inimigo::executar() {
 			mover();
+			pColisao->notificaColisao(this, pGrafico->getDeltaTempo());
 		}
 	}
 }
