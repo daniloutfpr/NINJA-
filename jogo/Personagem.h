@@ -27,6 +27,8 @@ namespace Entidades {
 			void pararDeMover();
 			void setVelX(float vx);
 			void setVelY(float vy);
+			virtual void atualizarSprite(float dt) = 0;
+			virtual void carregaTexturas() = 0;
 			virtual void mover(bool esquerda) = 0;
 			virtual void executar() = 0 ;
 			virtual void atualizar(float dt) = 0;

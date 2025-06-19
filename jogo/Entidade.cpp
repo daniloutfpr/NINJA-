@@ -5,14 +5,16 @@ namespace Gerenciadores {
 }
 
 namespace Entidades {
-	Entidade::Entidade(const sf::Vector2f pos, const sf::Vector2f tam,ID id):Ente(id),posicao(pos),tamanho(tam)
+	Entidade::Entidade(const sf::Vector2f pos, const sf::Vector2f tam,ID id):Ente(id),posicao(pos),tamanho(tam),sprite(nullptr)
 	{
 		//pColisao = Gerenciadores::GerenciadorDeColisoes::getInstancia();
 		corpo->setOrigin(tam.x / 2.0f, tam.y / 2.0f);
 		corpo->setPosition(posicao);
 	}
 	Entidade::~Entidade(){
-		//pColisao = Gerenciadores::GerenciadorDeColisoes::getInstancia();
+		if (sprite) {
+			delete sprite;
+		}
 	}
 
 	void Entidade::renderiza() {

@@ -1,5 +1,11 @@
 #pragma once
 #include "Lista.h"
+
+namespace Entidades {
+	namespace Personagens {
+		class Jogador;
+	}
+}
 namespace Lista {
 	class ListaDeEntidades
 	{

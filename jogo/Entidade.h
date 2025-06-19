@@ -1,5 +1,5 @@
 #pragma once
-#include "Ente.h"
+#include "Animacao.h"
 #define GRAVIDADE 500.0f
 
 namespace Gerenciadores {
@@ -11,6 +11,7 @@ namespace Entidades {
 	protected:
 		sf::Vector2f posicao;
 		sf::Vector2f tamanho;
+		ElementosGraficos::Animacao* sprite;
 		//Gerenciadores::GerenciadorDeColisoes* pColisao;
 	public:
 		Entidade(const sf::Vector2f pos, const sf::Vector2f tam,ID id=ID::vazio);

@@ -4,8 +4,8 @@
 //(Isaaque) estudar esse padrao de projeto depois
 
 namespace Gerenciadores {
-#define ALTURA_JANELA 800.0f
-#define LARGURA_JANELA 1000.0f
+#define ALTURA_JANELA 768.0f
+#define LARGURA_JANELA 1024.0f
 	class GerenciadorGrafico
 	{	
 	private:
@@ -13,6 +13,7 @@ namespace Gerenciadores {
 		sf::RenderWindow* pJanela;
 		sf::View camera;
 		//ainda vai ser necessario um mapa de texturas
+		unordered_map<std::string, sf::Texture*> texturas;
 		//e uma fonte
 		sf::Clock relogio;
 		static float dt;
@@ -32,6 +33,7 @@ namespace Gerenciadores {
 		void atualizaDeltaTempo();
 		const float getDeltaTempo() const;
 		bool evGraficos(sf::Event &e);
+		sf::Texture* carregarTextura(const char* caminho);
 		Math::CoordUI getTamJanela() const;
 		sf::Vector2f getCentroCam() const;
 		sf::Vector2f getCameraPos() const;

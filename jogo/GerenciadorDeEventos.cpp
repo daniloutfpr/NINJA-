@@ -1,8 +1,8 @@
 #include "GerenciadorDeEventos.h"
 namespace Gerenciadores {
 	GerenciadorDeEventos* GerenciadorDeEventos::pEventos = nullptr;
-	GerenciadorGrafico* GerenciadorDeEventos::pGrafico = GerenciadorGrafico::getInstancia();
-	GerenciadorDeInput* GerenciadorDeEventos::pInput = GerenciadorDeInput::getInstancia();
+	//GerenciadorGrafico* GerenciadorDeEventos::pGrafico = GerenciadorGrafico::getInstancia();
+	//GerenciadorDeInput* GerenciadorDeEventos::pInput = GerenciadorDeInput::getInstancia();
 
 	GerenciadorDeEventos::GerenciadorDeEventos() {
 		//pGrafico = GerenciadorGrafico::getInstancia();
@@ -20,6 +20,9 @@ namespace Gerenciadores {
 
 	void GerenciadorDeEventos::verificaEvento(){
 		sf::Event e;
+
+		GerenciadorGrafico* pGrafico = GerenciadorGrafico::getInstancia();
+		GerenciadorDeInput* pInput = GerenciadorDeInput::getInstancia();
 		while (pGrafico->evGraficos(e)) {
 			if (e.type == sf::Event::Closed) { pGrafico->fecharJanela(); }
 			if (e.type == sf::Event::KeyPressed) { pInput->notificaTeclaPressionada(e.key.code); }

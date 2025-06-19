@@ -7,10 +7,12 @@ namespace Entidades {
 			vel = Math::CoordF(10.0f, 10.0f);
 			Jogador1 = true;
 			corpo = new sf::RectangleShape(tam);
-			corpo->setFillColor(sf::Color::Red);
+			//corpo->setFillColor(sf::Color::Red);
 		
 			corpo->setPosition(pos);
 			pControle = new Gerenciadores::ControleJogador(this);
+
+			carregaTexturas();
 		}
 
 		Jogador::~Jogador() {
@@ -58,7 +60,7 @@ namespace Entidades {
 			vel.y += GRAVIDADE * dt;
 			posicao.x += vel.x * dt;
 			posicao.y += vel.y * dt;
-			
+			atualizarSprite(dt);
 			pColisao->notificaColisao(this, dt);
 			this->setPosicao(posicao);
 			//std::cout << posicao.x << std::endl;
@@ -69,6 +71,20 @@ namespace Entidades {
 			//mover();
 			atualizar(pGrafico->getDeltaTempo());
 			//pColisao->notificaColisao(this, pGrafico->getDeltaTempo());
+		}
+
+		void Jogador::carregaTexturas() {
+			sprite = new ElementosGraficos::Animacao(corpo, Math::CoordF(0.1, 0.1));
+
+			sprite->adicionarNovaAnimacao(ElementosGraficos::ID_Animacao::idle, "ninja_idle.png", 12);
+				//sprite->addNewAnimation(GraphicalElements::Animation_ID::idle, "p1_idle.png", 10);
+
+			corpo->setOrigin(tamanho.x / 2 + 15, tamanho.y / 2 + 52);
+
+		}
+
+		void Jogador::atualizarSprite(float dt) {
+			sprite->atualizar(ElementosGraficos::ID_Animacao::idle, !olhaEsquerda, Math::CoordF(posicao.x,posicao.y), dt);
 		}
 	}
 }

@@ -4,4 +4,5 @@
 int main()
 {
 	Ninja::Principal p;
+	p.executar();
 }

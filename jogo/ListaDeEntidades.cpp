@@ -1,5 +1,5 @@
 #include "ListaDeEntidades.h"
-
+#include "Jogador.h"
 namespace Lista{
 	
 	ListaDeEntidades::ListaDeEntidades():listaEntidades() {}
@@ -30,7 +30,12 @@ namespace Lista{
 		for (auto it = listaEntidades.begin(); it != listaEntidades.end(); ++it) {
 			Entidades::Entidade* e = *it;
 
+
+
 			if (e) {
+				if (Entidades::Personagens::Jogador* player = dynamic_cast<Entidades::Personagens::Jogador*> (e)) {
+					std::cout <<"player executando" << std::endl;
+				}
 				e->renderiza();
 				e->executar();
 			}

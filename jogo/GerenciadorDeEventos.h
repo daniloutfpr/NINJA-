@@ -4,8 +4,8 @@ namespace Gerenciadores {
 	class GerenciadorDeEventos
 	{
 	private:
-		static GerenciadorGrafico* pGrafico;
-		static GerenciadorDeInput* pInput;
+		 GerenciadorGrafico* pGrafico;
+		 GerenciadorDeInput* pInput;
 		static GerenciadorDeEventos* pEventos;
 
 		GerenciadorDeEventos();

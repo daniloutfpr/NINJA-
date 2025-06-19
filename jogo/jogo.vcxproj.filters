@@ -72,6 +72,15 @@
     <ClCompile Include="ControleJogador.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
+    <ClCompile Include="Animacao.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="Fase.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="Floresta.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Principal.h">
@@ -128,5 +137,45 @@
     <ClInclude Include="ControleJogador.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
+    <ClInclude Include="Animacao.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="Fase.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="Floresta.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Mini Ninja Game Sprite\PNG\MN_NINJA\01-Idle\MN_NINJA_Idle_001.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="ninja_idle.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="C:\Users\danil\Downloads\ninja_hurt.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="C:\Users\danil\Downloads\ninja_fall.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="C:\Users\danil\Downloads\ninja_idle.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="C:\Users\danil\Downloads\ninja_walk.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="C:\Users\danil\Downloads\ninja_attack.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="mapa_floresta.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="mapa_floresta.json">
+      <Filter>Arquivos de Recurso</Filter>
+    </None>
   </ItemGroup>
 </Project>
