@@ -14,7 +14,8 @@ namespace Fases {
 		Lista::ListaDeEntidades* entidadesMoveis;
 		Lista::ListaDeEntidades* entidadesEstaticas;
 		Gerenciadores::GerenciadorGrafico* pGrafico;
-		static Gerenciadores::GerenciadorDeColisoes* pColisoes;
+		Gerenciadores::GerenciadorDeColisoes* pColisoes;
+		Entidades::Personagens::Jogador* pJogador;
 
 	public:
 		Fase();

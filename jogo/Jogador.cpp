@@ -6,10 +6,10 @@ namespace Entidades {
 		{
 			vel = Math::CoordF(10.0f, 10.0f);
 			Jogador1 = true;
-			corpo = new sf::RectangleShape(tam);
+			//corpo = new sf::RectangleShape(tam);
 			//corpo->setFillColor(sf::Color::Red);
 		
-			corpo->setPosition(pos);
+			//corpo->setPosition(pos);
 			pControle = new Gerenciadores::ControleJogador(this);
 
 			carregaTexturas();
@@ -31,7 +31,7 @@ namespace Entidades {
 		void Jogador::mover(bool esquerda) {
 			if (podeMover) {
 				movendo = true;
-				std::cout << "Jogador::mover chamado! Esquerda: " << esquerda << std::endl;
+				//std::cout << "Jogador::mover chamado! Esquerda: " << esquerda << std::endl;
 				if (esquerda) {
 					olhaEsquerda = true;
 				}
@@ -70,6 +70,7 @@ namespace Entidades {
 		void Jogador::executar() {
 			//mover();
 			atualizar(pGrafico->getDeltaTempo());
+			std::cout << "Player posy:" << this->getPos().y <<  std::endl;
 			//pColisao->notificaColisao(this, pGrafico->getDeltaTempo());
 		}
 
@@ -79,7 +80,7 @@ namespace Entidades {
 			sprite->adicionarNovaAnimacao(ElementosGraficos::ID_Animacao::idle, "ninja_idle.png", 12);
 				//sprite->addNewAnimation(GraphicalElements::Animation_ID::idle, "p1_idle.png", 10);
 
-			corpo->setOrigin(tamanho.x / 2 + 15, tamanho.y / 2 + 52);
+			corpo->setOrigin(tamanho.x / 2 + 15, tamanho.y / 2 - 80);
 
 		}
 

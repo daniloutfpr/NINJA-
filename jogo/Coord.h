@@ -9,6 +9,7 @@
 #include <vector>
 #include <list>
 #include <stack>
+#include<set>
 #include <sstream>
 
 // Código baseado no repositório "Desert" de Matheus Burda

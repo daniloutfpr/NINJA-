@@ -145,6 +145,7 @@
     <ClCompile Include="jogo.cpp" />
     <ClCompile Include="Lista.cpp" />
     <ClCompile Include="ListaDeEntidades.cpp" />
+    <ClCompile Include="Mediator.cpp" />
     <ClCompile Include="Observer.cpp" />
     <ClCompile Include="Obstaculo.cpp" />
     <ClCompile Include="Personagem.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="Jogador.h" />
     <ClInclude Include="Lista.h" />
     <ClInclude Include="ListaDeEntidades.h" />
+    <ClInclude Include="Mediator.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="Obstaculo.h" />
     <ClInclude Include="Personagem.h" />

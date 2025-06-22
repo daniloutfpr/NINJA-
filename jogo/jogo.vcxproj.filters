@@ -81,6 +81,9 @@
     <ClCompile Include="Floresta.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
+    <ClCompile Include="Mediator.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Principal.h">
@@ -144,6 +147,9 @@
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
     <ClInclude Include="Floresta.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="Mediator.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
   </ItemGroup>

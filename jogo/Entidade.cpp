@@ -22,7 +22,7 @@ namespace Entidades {
 	}
 
 	sf::Vector2f Entidade::getPos()const{
-		return corpo->getPosition();
+		return posicao;
 	}
 	sf::Vector2f Entidade::getTamanho()const {
 		return tamanho;

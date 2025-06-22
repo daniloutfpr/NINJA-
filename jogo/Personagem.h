@@ -32,6 +32,7 @@ namespace Entidades {
 			virtual void mover(bool esquerda) = 0;
 			virtual void executar() = 0 ;
 			virtual void atualizar(float dt) = 0;
+			virtual void colidir(Entidade* pEnt = nullptr) = 0;
 			//virtual void executar() = 0;
 
 		};

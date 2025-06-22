@@ -9,7 +9,9 @@ namespace Fases {
         entidadesEstaticas(nullptr),
         pGrafico(nullptr),
         imagemMapa(nullptr),
-        spriteMapa(nullptr)
+        spriteMapa(nullptr),
+        pColisoes(nullptr),
+        pJogador(nullptr)
     {
         entidadesMoveis = new Lista::ListaDeEntidades();
         entidadesEstaticas = new Lista::ListaDeEntidades();
@@ -18,8 +20,9 @@ namespace Fases {
         spriteMapa = new ElementosGraficos::Animacao(imagemMapa, Math::CoordF(1, 1));
         criarFase("mapa_floresta.json");
         spriteMapa->adicionarNovaAnimacao(ElementosGraficos::ID_Animacao::mapa, "mapa_floresta.png", 1);
-        //Entidades::Personagens::Jogador* jogador = new Entidades::Personagens::Jogador();
-        //ntidadesMoveis->adicionarEntidade(jogador);
+        pColisoes = Gerenciadores::GerenciadorDeColisoes::getInstancia();
+        pColisoes->setListas(entidadesEstaticas, entidadesMoveis);
+        //entidadesMoveis->adicionarEntidade(jogador);
     }
 
    
@@ -61,12 +64,15 @@ namespace Fases {
             return;
         }
 
-        int width = tmjData["width"];
-        int height = tmjData["height"];
+        int width = 32;
+        int height = 24;
         int indice = 0;
 
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
+
+ 
+
                 int value = tmjData["layers"][1]["data"][indice++];
                 float posx = 32 * x;
                 float posy = 32 * y;
@@ -78,17 +84,20 @@ namespace Fases {
                     Entidades::Obstaculos::Plataforma* tmp = nullptr;
                     tmp = new Entidades::Obstaculos::Plataforma(sf::Vector2f(posx, posy), sf::Vector2f(32.0f, 32.0f), ID::plataforma);
                     if (tmp) {
-                        std::cout << "tmp plataforma existe" << std::endl;
+                       
                         entidadesEstaticas->adicionarEntidade(tmp);
+                        std::cout << "PLataforma criada e adicionada!" << std::endl;
+                      
                     }
                     break;
                 }
                 case 2: {
                     Entidades::Personagens::Jogador* tmp = nullptr;
-                    tmp = new Entidades::Personagens::Jogador(sf::Vector2f(posx, posy), sf::Vector2f(0.1f, 0.1f), ID::jogador);
+                    tmp = new Entidades::Personagens::Jogador(sf::Vector2f(posx, posy), sf::Vector2f(0.3f, 0.3f), ID::jogador);
                     if (tmp) {
-                        std::cout << "tmp player existe" << std::endl;
+                         
                         entidadesMoveis->adicionarEntidade(tmp);
+                        this->pJogador = tmp;
                     }
                 }
                 }
@@ -100,11 +109,17 @@ namespace Fases {
        //imagemMapa->setOrigin(0.0f, 0.0f);
         //entidadesMoveis->adicionarEntidade(jogador);
         spriteMapa->atualizar(ElementosGraficos::ID_Animacao::mapa, false, (0.0f, 0.0f), pGrafico->getDeltaTempo());
-        pGrafico->renderizar(imagemMapa);
-        pGrafico->centralizarCam(Math::CoordF(imagemMapa->getPosition().x/2.0f,imagemMapa->getPosition().y/2.0f));
-        entidadesMoveis->executar(pGrafico->getDeltaTempo());
+        //pGrafico->renderizar(imagemMapa);
+        if (pJogador) {
+            pGrafico->centralizarCam(pJogador->getPosition());
+        }
+       // imagemMapa->setPosition(pGrafico->getCentroCam());
+        //entidadesMoveis->executar(pGrafico->getDeltaTempo());
+    
         entidadesEstaticas->executar(pGrafico->getDeltaTempo());
-            
+        entidadesMoveis->executar(pGrafico->getDeltaTempo());
+        pGrafico->renderizar(imagemMapa);
+        //jogador.executar();
     }
 
    // Lista::ListaDeEntidades* Fase::getListaEntidades() {

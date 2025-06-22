@@ -5,8 +5,8 @@ namespace Gerenciadores {
 	//GerenciadorDeInput* GerenciadorDeEventos::pInput = GerenciadorDeInput::getInstancia();
 
 	GerenciadorDeEventos::GerenciadorDeEventos() {
-		//pGrafico = GerenciadorGrafico::getInstancia();
-		//pInput = GerenciadorDeInput::getInstancia();
+		pGrafico = GerenciadorGrafico::getInstancia();
+		pInput = GerenciadorDeInput::getInstancia();
 	}
 
 	GerenciadorDeEventos::~GerenciadorDeEventos(){}

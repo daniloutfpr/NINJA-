@@ -23,6 +23,7 @@ namespace Entidades {
 		void setPos(Math::CoordF p);
 		void setTamanho(sf::Vector2f t);
 		sf::Vector2f getTamanho()const;
+		virtual void colidir(Entidade* pEnt = nullptr)=0;
 		//virtual void atualizar(float dt) = 0;
 		virtual void executar() = 0;
 	};
