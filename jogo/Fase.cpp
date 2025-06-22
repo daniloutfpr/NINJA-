@@ -5,23 +5,23 @@ namespace Fases {
     //Gerenciadores::GerenciadorGrafico* Fase::pGrafico = nullptr;
    
     Fase::Fase() :
-        entidadesMoveis(nullptr),
-        entidadesEstaticas(nullptr),
+        lJogadores(nullptr),
+        lObstaculos(nullptr),
         pGrafico(nullptr),
         imagemMapa(nullptr),
         spriteMapa(nullptr),
         pColisoes(nullptr),
         pJogador(nullptr)
     {
-        entidadesMoveis = new Lista::ListaDeEntidades();
-        entidadesEstaticas = new Lista::ListaDeEntidades();
+        lJogadores= new Lista::ListaDeEntidades();
+        lObstaculos= new Lista::ListaDeEntidades();
         pGrafico = Gerenciadores::GerenciadorGrafico::getInstancia();
         imagemMapa = new sf::RectangleShape(sf::Vector2f(1024.0f, 768.0f));
         spriteMapa = new ElementosGraficos::Animacao(imagemMapa, Math::CoordF(1, 1));
         criarFase("mapa_floresta.json");
         spriteMapa->adicionarNovaAnimacao(ElementosGraficos::ID_Animacao::mapa, "mapa_floresta.png", 1);
         pColisoes = Gerenciadores::GerenciadorDeColisoes::getInstancia();
-        pColisoes->setListas(entidadesEstaticas, entidadesMoveis);
+        
         //entidadesMoveis->adicionarEntidade(jogador);
     }
 
@@ -29,13 +29,13 @@ namespace Fases {
 
     Fase::~Fase() {
     
-        if (entidadesMoveis) {
-            delete entidadesMoveis;
-            entidadesMoveis = nullptr;
+        if (lJogadores) {
+            delete lJogadores;
+            lJogadores = nullptr;
         }
-        if (entidadesEstaticas) {
-            delete entidadesEstaticas;
-            entidadesEstaticas = nullptr;
+        if (lObstaculos) {
+            delete lObstaculos;
+            lObstaculos = nullptr;
         }
         if (imagemMapa) {
             delete imagemMapa;
@@ -85,7 +85,7 @@ namespace Fases {
                     tmp = new Entidades::Obstaculos::Plataforma(sf::Vector2f(posx, posy), sf::Vector2f(32.0f, 32.0f), ID::plataforma);
                     if (tmp) {
                        
-                        entidadesEstaticas->adicionarEntidade(tmp);
+                        lObstaculos->adicionarEntidade(tmp);
                         std::cout << "PLataforma criada e adicionada!" << std::endl;
                       
                     }
@@ -96,7 +96,7 @@ namespace Fases {
                     tmp = new Entidades::Personagens::Jogador(sf::Vector2f(posx, posy), sf::Vector2f(0.3f, 0.3f), ID::jogador);
                     if (tmp) {
                          
-                        entidadesMoveis->adicionarEntidade(tmp);
+                        lJogadores->adicionarEntidade(tmp);
                         this->pJogador = tmp;
                     }
                 }
@@ -116,8 +116,8 @@ namespace Fases {
        // imagemMapa->setPosition(pGrafico->getCentroCam());
         //entidadesMoveis->executar(pGrafico->getDeltaTempo());
     
-        entidadesEstaticas->executar(pGrafico->getDeltaTempo());
-        entidadesMoveis->executar(pGrafico->getDeltaTempo());
+        lJogadores->executar(pGrafico->getDeltaTempo());
+        lObstaculos->executar(pGrafico->getDeltaTempo());
         pGrafico->renderizar(imagemMapa);
         //jogador.executar();
     }

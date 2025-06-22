@@ -14,7 +14,7 @@ namespace Entidades {
 			//sf::RectangleShape* getObs();
 			virtual void obstaculizar() = 0;
 			virtual void executar() = 0;
-			virtual void colidir(Entidade* pEnt = nullptr) = 0;
+			virtual void colidir(Entidade* pEnt ) = 0;
 		};
 	}
 }

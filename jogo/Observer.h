@@ -1,5 +1,5 @@
 #pragma once
-#include "Plataforma.h"
+#include "GerenciadorDeColisoes.h"
 namespace Gerenciadores {
 	
 	class GerenciadorDeInput;

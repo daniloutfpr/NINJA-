@@ -2,13 +2,13 @@
 
 namespace Entidades {
 	namespace Personagens {
-		
+		//pColisao = Gerenciadores::GerenciadorDeColisoes::getInstancia();
 		Personagem::Personagem(const sf::Vector2f pos, const sf::Vector2f tam,ID id) 
 			:Entidade(pos,tam,id),movendo(false),podeMover(true),olhaEsquerda(false),num_vidas(0)
 		{
 			//corpo->setPosition(pos);
 			pular = true;
-			pColisao = Gerenciadores::GerenciadorDeColisoes::getInstancia();
+			//pColisao = Gerenciadores::GerenciadorDeColisoes::getInstancia();
 		}
 		Personagem::~Personagem(){}
 

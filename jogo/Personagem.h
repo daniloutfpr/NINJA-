@@ -1,5 +1,5 @@
 #pragma once
-#include "GerenciadorDeColisoes.h"
+#include "ListaDeEntidades.h"
 
 
 namespace Entidades {
@@ -9,7 +9,7 @@ namespace Entidades {
 		protected:
 			Math::CoordF vel;
 			bool pular;
-			 Gerenciadores::GerenciadorDeColisoes* pColisao;
+			 //Gerenciadores::GerenciadorDeColisoes* pColisao;
 			 int num_vidas;
 			 bool movendo;
 			 bool podeMover;
@@ -32,7 +32,7 @@ namespace Entidades {
 			virtual void mover(bool esquerda) = 0;
 			virtual void executar() = 0 ;
 			virtual void atualizar(float dt) = 0;
-			virtual void colidir(Entidade* pEnt = nullptr) = 0;
+			virtual void colidir(Entidade* pEnt ) = 0;
 			//virtual void executar() = 0;
 
 		};

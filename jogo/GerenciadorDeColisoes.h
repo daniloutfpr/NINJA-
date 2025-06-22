@@ -3,16 +3,28 @@
 #include <list>
 #include <vector>
 #include "Mediator.h"
-#include "Jogador.h"
-#include"Inimigo.h"
-#include "Obstaculo.h"
+//#include "Jogador.h"
+//"Inimigo.h"
+//#include "Obstaculo.h"
 
+namespace Entidades {
+	class Entidade; 
+
+	namespace Personagens {
+		class Jogador;
+		class Inimigo; 
+	}
+	namespace Obstaculos {
+		class Obstaculo;
+	}
+
+}
 
 namespace Gerenciadores {
 	//gerenciador singleton
-		class GerenciadorColisoes : public Mediator {
+		class GerenciadorDeColisoes : public Mediator {
 		private:
-			static GerenciadorColisoes* instancia;
+			static GerenciadorDeColisoes* instancia;
 
 			std::set<Entidades::Personagens::Jogador*> jogadores;
 			std::set<Entidades::Personagens::Inimigo*> inimigos;
@@ -20,13 +32,13 @@ namespace Gerenciadores {
 			//std::set<Entidades::Projetil*> projeteis;
 
 		private:
-			GerenciadorColisoes();
-			~GerenciadorColisoes();
-			GerenciadorColisoes(const GerenciadorColisoes&) = delete;
-			GerenciadorColisoes& operator=(const GerenciadorColisoes&) = delete;
+			GerenciadorDeColisoes();
+			~GerenciadorDeColisoes();
+			GerenciadorDeColisoes(const GerenciadorDeColisoes&) = delete;
+			GerenciadorDeColisoes& operator=(const GerenciadorDeColisoes&) = delete;
 
 			// Funcoes para verificar colisoes de cada caso de entidade
-			void verificarProj(Entidades::Entidade* pEnt);
+			//void verificarProj(Entidades::Entidade* pEnt);
 			void verificarInim(Entidades::Entidade* pEnt);
 			void verificarJog(Entidades::Entidade* pEnt);
 
@@ -42,7 +54,7 @@ namespace Gerenciadores {
 			// ============================================================================
 
 		public:
-			static GerenciadorColisoes* getInstancia();
+			static GerenciadorDeColisoes* getInstancia();
 
 			void notificar(Entidades::Entidade* sender);
 

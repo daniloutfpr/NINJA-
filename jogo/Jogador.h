@@ -1,10 +1,12 @@
 #pragma once
 #include "Personagem.h"
 
-
 #define PLAYER_VELOCIDADE 500.0f
 namespace Gerenciadores {
 	class ControleJogador;
+}
+namespace Gerenciadores {
+	class GerenciadorDeColisoes;
 }
 namespace Entidades {
 	namespace Personagens {
@@ -23,6 +25,7 @@ namespace Entidades {
 			void atualizar(float dt);
 			void atualizarSprite(float dt);
 			void carregaTexturas();
+			void colidir(Entidade* pEnt );
 		};
 	}
 }

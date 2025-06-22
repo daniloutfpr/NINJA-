@@ -1,24 +1,23 @@
 #include "GerenciadorDeColisoes.h"
-#include "Personagem.h"
 namespace Gerenciadores {
     // ============================================================================
     // Construtora, Destrutora e Singleton
     // ============================================================================
 
-    GerenciadorColisoes* GerenciadorColisoes::instancia = nullptr;
+    GerenciadorDeColisoes* GerenciadorDeColisoes::instancia = nullptr;
 
-    GerenciadorColisoes::GerenciadorColisoes()
+    GerenciadorDeColisoes::GerenciadorDeColisoes()
         : jogadores(), inimigos(), obstaculos()  {
         limparEntidades();
     }
 
-    GerenciadorColisoes::~GerenciadorColisoes() {
+    GerenciadorDeColisoes::~GerenciadorDeColisoes() {
         limparEntidades();
     }
 
-    GerenciadorColisoes* GerenciadorColisoes::getInstancia() {
+    GerenciadorDeColisoes* GerenciadorDeColisoes::getInstancia() {
         if (!instancia) {
-            instancia = new GerenciadorColisoes();
+            instancia = new GerenciadorDeColisoes();
         }
         return instancia;
     }
@@ -27,7 +26,7 @@ namespace Gerenciadores {
     // Funcoes auxiliares
     // ============================================================================
 
-    float GerenciadorColisoes::calcOverlapVert(
+    float GerenciadorDeColisoes::calcOverlapVert(
         const Entidades::Entidade* e1, const Entidades::Entidade* e2) const {
         if (e1 && e2) {
             float distY = std::abs((e1->getPos().y + e1->getTamanho().y / 2.f) -
@@ -41,12 +40,12 @@ namespace Gerenciadores {
 
         }
         else {
-            std::cerr << "erro: GerenciadorColisoes::calcOverlapVert(...)\n";
+            std::cerr << "erro: GerenciadorDeColisoes::calcOverlapVert(...)\n";
             exit(EXIT_FAILURE);
         }
     }
 
-    float GerenciadorColisoes::calcOverlapHor(const Entidades::Entidade* e1,
+    float GerenciadorDeColisoes::calcOverlapHor(const Entidades::Entidade* e1,
         const Entidades::Entidade* e2) const {
         if (e1 && e2) {
             float distX = std::abs((e1->getPos().x + e1->getTamanho().x / 2.f) -
@@ -60,32 +59,32 @@ namespace Gerenciadores {
 
         }
         else {
-            std::cerr << "erro: GerenciadorColisoes::calcOverlapHor(...)\n";
+            std::cerr << "erro: GerenciadorDeColisoes::calcOverlapHor(...)\n";
             exit(EXIT_FAILURE);
         }
     }
 
-    sf::Vector2f GerenciadorColisoes::calcOverlap(
+    sf::Vector2f GerenciadorDeColisoes::calcOverlap(
         const Entidades::Entidade* e1, const Entidades::Entidade* e2) const {
         return sf::Vector2f(calcOverlapHor(e1, e2), calcOverlapVert(e1, e2));
     }
 
-    bool GerenciadorColisoes::colidiuVertical(const Entidades::Entidade* e1,
+    bool GerenciadorDeColisoes::colidiuVertical(const Entidades::Entidade* e1,
         const Entidades::Entidade* e2) const {
         return calcOverlapVert(e1, e2) != 0;
     }
 
-    bool GerenciadorColisoes::colidiuHorizontal(
+    bool GerenciadorDeColisoes::colidiuHorizontal(
         const Entidades::Entidade* e1, const Entidades::Entidade* e2) const {
         return calcOverlapHor(e1, e2) != 0;
     }
 
-    bool GerenciadorColisoes::colidiu(const Entidades::Entidade* e1,
+    bool GerenciadorDeColisoes::colidiu(const Entidades::Entidade* e1,
         const Entidades::Entidade* e2) const {
         if (e1 && e2)
             return (colidiuHorizontal(e1, e2) && colidiuVertical(e1, e2));
         else {
-            std::cerr << "erro: GerenciadorColisoes::colidiu(...)\n";
+            std::cerr << "erro: GerenciadorDeColisoes::colidiu(...)\n";
             exit(EXIT_FAILURE);
         }
     }
@@ -94,9 +93,9 @@ namespace Gerenciadores {
     // Funcao do padrao de projeto Mediator
     // ============================================================================
 
-    void GerenciadorColisoes::notificar(Entidades::Entidade* sender) {
+    void GerenciadorDeColisoes::notificar(Entidades::Entidade* sender) {
         if (sender == nullptr) {
-            std::cerr << "erro: GerenciadorColisoes::notificar(...)\n";
+            std::cerr << "erro: GerenciadorDeColisoes::notificar(...)\n";
             exit(EXIT_FAILURE);
         }
 
@@ -116,9 +115,9 @@ namespace Gerenciadores {
     // Funcao para verificar se projetil colidiu com jogador, inimigo ou obstaculo
     // ============================================================================
 
-   /* void GerenciadorColisoes::verificarProj(Entidades::Entidade* pEnt) {
+   /* void GerenciadorDeColisoes::verificarProj(Entidades::Entidade* pEnt) {
         if (pEnt == nullptr) {
-            std::cerr << "erro: GerenciadorColisoes::verificarProj(...)\n";
+            std::cerr << "erro: GerenciadorDeColisoes::verificarProj(...)\n";
             exit(EXIT_FAILURE);
         }
 
@@ -135,7 +134,7 @@ namespace Gerenciadores {
                 }
             }
             else {
-                std::cerr << "erro: GerenciadorColisoes::verificarProj(...)\n";
+                std::cerr << "erro: GerenciadorDeColisoes::verificarProj(...)\n";
                 exit(EXIT_FAILURE);
             }
         }
@@ -149,7 +148,7 @@ namespace Gerenciadores {
                 }
             }
             else {
-                std::cerr << "erro: GerenciadorColisoes::verificarProj(...)\n";
+                std::cerr << "erro: GerenciadorDeColisoes::verificarProj(...)\n";
                 exit(EXIT_FAILURE);
             }
         }
@@ -162,7 +161,7 @@ namespace Gerenciadores {
                 }
             }
             else {
-                std::cerr << "erro: GerenciadorColisoes::verificarProj(...)\n";
+                std::cerr << "erro: GerenciadorDeColisoes::verificarProj(...)\n";
                 exit(EXIT_FAILURE);
             }
         }
@@ -173,9 +172,9 @@ namespace Gerenciadores {
     // Funcao para verificar se inimigo colidiu com jogador ou obstaculo
     // ============================================================================
 
-    void GerenciadorColisoes::verificarInim(Entidades::Entidade* pEnt) {
+    void GerenciadorDeColisoes::verificarInim(Entidades::Entidade* pEnt) {
         if (pEnt == nullptr) {
-            std::cerr << "erro: GerenciadorColisoes::verificarInim(...) => inimigo == "
+            std::cerr << "erro: GerenciadorDeColisoes::verificarInim(...) => inimigo == "
                 "nullptr\n";
             exit(EXIT_FAILURE);
         }
@@ -191,7 +190,7 @@ namespace Gerenciadores {
                 }
             }
             else {
-                std::cerr << "erro: GerenciadorColisoes::verificarInim(...) jogador == "
+                std::cerr << "erro: GerenciadorDeColisoes::verificarInim(...) jogador == "
                     "nullptr\n";
                 exit(EXIT_FAILURE);
             }
@@ -205,7 +204,7 @@ namespace Gerenciadores {
                 }
             }
             else {
-                std::cerr << "erro: GerenciadorColisoes::verificarInim(...) obstaculo == "
+                std::cerr << "erro: GerenciadorDeColisoes::verificarInim(...) obstaculo == "
                     "nullptr\n";
                 exit(EXIT_FAILURE);
             }
@@ -216,9 +215,9 @@ namespace Gerenciadores {
     // Funcao para verificar se jogador colidiu com algum obstaculo
     // ============================================================================
 
-    void GerenciadorColisoes::verificarJog(Entidades::Entidade* pEnt) {
+    void GerenciadorDeColisoes::verificarJog(Entidades::Entidade* pEnt) {
         if (pEnt == nullptr) {
-            std::cerr << "erro: GerenciadorColisoes::verificarJog(...)\n";
+            std::cerr << "erro: GerenciadorDeColisoes::verificarJog(...)\n";
             exit(EXIT_FAILURE);
         }
 
@@ -232,7 +231,7 @@ namespace Gerenciadores {
                 }
             }
             else {
-                std::cerr << "erro: GerenciadorColisoes::verificarJog(...)\n";
+                std::cerr << "erro: GerenciadorDeColisoes::verificarJog(...)\n";
                 exit(EXIT_FAILURE);
             }
         }
@@ -242,34 +241,34 @@ namespace Gerenciadores {
     // Funcoes para gerenciar os conjuntos de entidades
     // ============================================================================
 
-    void GerenciadorColisoes::incluirJog(Entidades::Personagens::Jogador* pJog) {
+    void GerenciadorDeColisoes::incluirJog(Entidades::Personagens::Jogador* pJog) {
         if (pJog)
             jogadores.insert(pJog);
     }
 
-    void GerenciadorColisoes::incluirInim(Entidades::Personagens::Inimigo* pInim) {
+    void GerenciadorDeColisoes::incluirInim(Entidades::Personagens::Inimigo* pInim) {
         if (pInim)
             inimigos.insert(pInim);
     }
 
-    void GerenciadorColisoes::incluirObst(Entidades::Obstaculos::Obstaculo* pObst) {
+    void GerenciadorDeColisoes::incluirObst(Entidades::Obstaculos::Obstaculo* pObst) {
         if (pObst)
             obstaculos.insert(pObst);
     }
 
-    //void GerenciadorColisoes::incluirProj(Projetil* pProj) {
+    //void GerenciadorDeColisoes::incluirProj(Projetil* pProj) {
        // if (pProj)
           //  projeteis.insert(pProj);
    // }
 
-    void GerenciadorColisoes::limparEntidades() {
+    void GerenciadorDeColisoes::limparEntidades() {
         jogadores.clear();
         inimigos.clear();
         obstaculos.clear();
        // projeteis.clear();
     }
 
-    void GerenciadorColisoes::removerEnt(Entidades::Entidade* pEnt) {
+    void GerenciadorDeColisoes::removerEnt(Entidades::Entidade* pEnt) {
         ID id = pEnt->getID();
 
         if (id==inimigo) {

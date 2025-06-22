@@ -11,7 +11,7 @@ namespace Entidades {
 			~Plataforma();
 			void obstaculizar();
 			void executar();
-			void colidir(Entidade* pEnt = nullptr);
+			void colidir(Entidade* pEnt );
 		};
 	}
 }

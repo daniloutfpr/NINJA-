@@ -1,12 +1,13 @@
+#include "Plataforma.h"
+namespace Gerenciadores {
+	class Mediator {
+	private:
+		bool ativo;
 
-#include "ListaDeEntidades.h"
-class Mediator {
-private:
-	bool ativo;
-
-public:
-	Mediator();
-	virtual ~Mediator();
-	virtual void notificar(Entidades::Entidade* sender) = 0;
-};
+	public:
+		Mediator();
+		virtual ~Mediator();
+		virtual void notificar(Entidades::Entidade* sender) = 0;
+	};
+}
 

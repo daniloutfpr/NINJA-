@@ -11,8 +11,10 @@ namespace Fases {
 	protected:
 		sf::RectangleShape* imagemMapa;
 		ElementosGraficos::Animacao* spriteMapa;
-		Lista::ListaDeEntidades* entidadesMoveis;
-		Lista::ListaDeEntidades* entidadesEstaticas;
+		Lista::ListaDeEntidades* lJogadores;
+		Lista::ListaDeEntidades* lObstaculos;
+		//Lista::ListaDeEntidades* lInimigos;
+		//Lista::ListaDeEntidades* lProjeteis;
 		Gerenciadores::GerenciadorGrafico* pGrafico;
 		Gerenciadores::GerenciadorDeColisoes* pColisoes;
 		Entidades::Personagens::Jogador* pJogador;

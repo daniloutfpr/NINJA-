@@ -1,5 +1,9 @@
 #pragma once
 #include "Jogador.h"
+
+namespace Gerenciadores {
+	class GerenciadorDeColisoes;
+}
 namespace Entidades {
 	namespace Personagens {
 		class Inimigo :public Personagem
@@ -13,6 +17,7 @@ namespace Entidades {
 			~Inimigo();
 			void mover();
 			void executar();
+			void colidir(Entidade* pEnt);
 		};
 	}
 }

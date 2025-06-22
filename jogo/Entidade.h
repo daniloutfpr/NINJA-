@@ -6,13 +6,15 @@ namespace Gerenciadores {
 	class GerenciadorDeColisoes;
 }
 namespace Entidades {
+
+	
 	class Entidade :public Ente
 	{
 	protected:
 		sf::Vector2f posicao;
 		sf::Vector2f tamanho;
 		ElementosGraficos::Animacao* sprite;
-		//Gerenciadores::GerenciadorDeColisoes* pColisao;
+		static Gerenciadores::GerenciadorDeColisoes* pColisao;
 	public:
 		Entidade(const sf::Vector2f pos, const sf::Vector2f tam,ID id=ID::vazio);
 		virtual ~Entidade();
@@ -23,7 +25,7 @@ namespace Entidades {
 		void setPos(Math::CoordF p);
 		void setTamanho(sf::Vector2f t);
 		sf::Vector2f getTamanho()const;
-		virtual void colidir(Entidade* pEnt = nullptr)=0;
+		virtual void colidir(Entidade* pEnt  ) = 0;
 		//virtual void atualizar(float dt) = 0;
 		virtual void executar() = 0;
 	};

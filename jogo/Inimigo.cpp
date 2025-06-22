@@ -1,5 +1,5 @@
 #include "Inimigo.h"
-
+#include"GerenciadorDeColisoes.h"
 namespace Entidades {
 	namespace Personagens {
 	
@@ -41,7 +41,7 @@ namespace Entidades {
 
 		void Inimigo::executar() {
 			mover();
-			pColisao->notificaColisao(this, pGrafico->getDeltaTempo());
+			pColisao->notificar(this);
 		}
 	}
 }

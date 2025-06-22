@@ -1,5 +1,6 @@
 	#include "Jogador.h"	
 	#include "ControleJogador.h"
+	#include"GerenciadorDeColisoes.h"
 namespace Entidades {
 	namespace Personagens {
 		Jogador::Jogador(sf::Vector2f pos,  sf::Vector2f tam,ID id) :Personagem(pos, tam,id),velocidade(PLAYER_VELOCIDADE)
@@ -61,7 +62,7 @@ namespace Entidades {
 			posicao.x += vel.x * dt;
 			posicao.y += vel.y * dt;
 			atualizarSprite(dt);
-			pColisao->notificaColisao(this, dt);
+			pColisao->notificar(this);
 			this->setPosicao(posicao);
 			//std::cout << posicao.x << std::endl;
 
