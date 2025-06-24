@@ -34,6 +34,7 @@ namespace Gerenciadores {
 		const float getDeltaTempo() const;
 		bool evGraficos(sf::Event &e);
 		sf::Texture* carregarTextura(const char* caminho);
+		sf::RenderWindow* getJanela();
 		Math::CoordUI getTamJanela() const;
 		sf::Vector2f getCentroCam() const;
 		sf::Vector2f getCameraPos() const;

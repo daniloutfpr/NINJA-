@@ -33,7 +33,7 @@ namespace ElementosGraficos {
 
         sf::IntRect tamRetangulo = tmp->getTamanho();
         corpo->setSize(sf::Vector2f((float)tamRetangulo.width, (float)tamRetangulo.height));
-        corpo->setOrigin(sf::Vector2f((float)tamRetangulo.width, (float)tamRetangulo.height) / 2.0f);
+        corpo->setOrigin(sf::Vector2f(0.0f,0.0f));
     }
 
     void Animacao::atualizar(ID_Animacao id, bool olhandoParaEsquerda, Math::CoordF posicao, float dt) {

@@ -10,14 +10,25 @@ namespace Entidades {
 		{
 		private:
 			int nivel_maldade;
-			Entidades::Personagens::Jogador* jogador;
-			void inicializa();
+			Entidades::Personagens::Jogador* pJogador1;
+			Entidades::Personagens::Jogador* pJogador2;
+		
 		public:
-			Inimigo(sf::Vector2f pos, sf::Vector2f tam,Entidades::Personagens::Jogador* j,ID id=ID::inimigo);
-			~Inimigo();
-			void mover();
+			Inimigo(sf::Vector2f pos, sf::Vector2f tam,ID id=ID::vazio);
+			virtual ~Inimigo();
 			void executar();
-			void colidir(Entidade* pEnt);
+			
+			void setJogadores(Jogador* jog1, Jogador* jog2);
+			Jogador* jogadorMaisProximo();
+			void set_nivelMaldade(int nv);
+			int get_nivelMaldade();
+			//void mover();
+			//void executar();
+			virtual void colidir(Entidade* pEnt)=0;
+			virtual void atualizarSprite(float dt) = 0;
+			virtual void carregaTexturas() = 0;
+			virtual void executar() = 0;
+			virtual void atacar() = 0;
 		};
 	}
 }

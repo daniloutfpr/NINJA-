@@ -34,7 +34,7 @@ namespace Lista{
 
 			if (e) {
 				if (Entidades::Personagens::Jogador* player = dynamic_cast<Entidades::Personagens::Jogador*> (e)) {
-					std::cout <<"player executando" << std::endl;
+					//std::cout <<"player executando" << std::endl;
 				}
 				e->renderiza();
 				e->executar();

@@ -13,14 +13,30 @@ namespace Fases {
         pColisoes(nullptr),
         pJogador(nullptr)
     {
-        lJogadores= new Lista::ListaDeEntidades();
-        lObstaculos= new Lista::ListaDeEntidades();
+        lJogadores = new Lista::ListaDeEntidades();
+        lObstaculos = new Lista::ListaDeEntidades();
         pGrafico = Gerenciadores::GerenciadorGrafico::getInstancia();
-        imagemMapa = new sf::RectangleShape(sf::Vector2f(1024.0f, 768.0f));
-        spriteMapa = new ElementosGraficos::Animacao(imagemMapa, Math::CoordF(1, 1));
-        criarFase("mapa_floresta.json");
-        spriteMapa->adicionarNovaAnimacao(ElementosGraficos::ID_Animacao::mapa, "mapa_floresta.png", 1);
         pColisoes = Gerenciadores::GerenciadorDeColisoes::getInstancia();
+
+
+        
+        imagemMapa = new sf::RectangleShape(sf::Vector2f(1024.0f, 768.0f));
+        imagemMapa->setOrigin(sf::Vector2f(0.0f,0.0f));
+        spriteMapa = new ElementosGraficos::Animacao(imagemMapa, Math::CoordF(1, 1));
+        spriteMapa->adicionarNovaAnimacao(ElementosGraficos::ID_Animacao::mapa, "mapa_floresta.png", 1);
+
+
+       
+        criarFase("mapa_floresta.json");
+            
+            //sf::Vector2f tamanhoMapa = imagemMapa->getSize();
+
+            // Calcula o ponto central do mapa
+            //sf::Vector2f centroDoMapa(tamanhoMapa.x / 2.0f, tamanhoMapa.y / 2.0f);
+            //Math::CoordF centroParaCamera(centroDoMapa.x, centroDoMapa.y);
+
+            // Manda o Gerenciador Gráfico centralizar a câmera neste ponto fixo
+           // pGrafico->centralizarCam(centroParaCamera);
         
         //entidadesMoveis->adicionarEntidade(jogador);
     }
@@ -86,7 +102,8 @@ namespace Fases {
                     if (tmp) {
                        
                         lObstaculos->adicionarEntidade(tmp);
-                        std::cout << "PLataforma criada e adicionada!" << std::endl;
+                        pColisoes->incluirObst(tmp);
+                       // std::cout << "PLataforma criada e adicionada!" << std::endl;
                       
                     }
                     break;
@@ -101,25 +118,27 @@ namespace Fases {
                     }
                 }
                 }
+
             }
         }
+        std::cout << "--- RELATORIO DE CRIACAO DE FASE ---" << std::endl;
+        std::cout << "Total de Plataformas criadas: " << lObstaculos->getTam() << std::endl;
+        std::cout << "Total de Jogadores/Inimigos criados: " << lJogadores->getTam() << std::endl;
+        std::cout << "------------------------------------" << std::endl;
     }
     
     void Fase::executar() {
-       //imagemMapa->setOrigin(0.0f, 0.0f);
-        //entidadesMoveis->adicionarEntidade(jogador);
         spriteMapa->atualizar(ElementosGraficos::ID_Animacao::mapa, false, (0.0f, 0.0f), pGrafico->getDeltaTempo());
-        //pGrafico->renderizar(imagemMapa);
-        if (pJogador) {
-            pGrafico->centralizarCam(pJogador->getPosition());
-        }
-       // imagemMapa->setPosition(pGrafico->getCentroCam());
-        //entidadesMoveis->executar(pGrafico->getDeltaTempo());
-    
+        
+       //if (pJogador) {
+        //    pGrafico->centralizarCam(pJogador->getPosition());
+     //  }
+     
+        
+        pGrafico->renderizar(imagemMapa);
         lJogadores->executar(pGrafico->getDeltaTempo());
         lObstaculos->executar(pGrafico->getDeltaTempo());
-        pGrafico->renderizar(imagemMapa);
-        //jogador.executar();
+        
     }
 
    // Lista::ListaDeEntidades* Fase::getListaEntidades() {

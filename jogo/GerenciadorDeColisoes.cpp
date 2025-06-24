@@ -99,6 +99,7 @@ namespace Gerenciadores {
             exit(EXIT_FAILURE);
         }
 
+      //  std::cout << "Colidindo!" << std::endl;
         ID id = sender->getID();
 
         //if (ehProjetil(id))
@@ -220,13 +221,16 @@ namespace Gerenciadores {
             std::cerr << "erro: GerenciadorDeColisoes::verificarJog(...)\n";
             exit(EXIT_FAILURE);
         }
-
+        
         std::set<Entidades::Obstaculos::Obstaculo*>::iterator obstIt;
 
+       
         for (obstIt = obstaculos.begin(); obstIt != obstaculos.end(); obstIt++) {
+            
             if (*obstIt) {
                 if (colidiu(pEnt, *obstIt)) {
                     // Jogador colide com obstaculo
+                    
                     (*obstIt)->colidir(pEnt);
                 }
             }
@@ -253,6 +257,7 @@ namespace Gerenciadores {
 
     void GerenciadorDeColisoes::incluirObst(Entidades::Obstaculos::Obstaculo* pObst) {
         if (pObst)
+        
             obstaculos.insert(pObst);
     }
 

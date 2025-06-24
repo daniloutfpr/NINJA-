@@ -3,45 +3,35 @@
 namespace Entidades {
 	namespace Personagens {
 	
-		Inimigo::Inimigo(sf::Vector2f pos, sf::Vector2f tam, Entidades::Personagens::Jogador* j,ID id ):
-			Personagem(pos,tam,id),jogador(j){
+		Inimigo::Inimigo(sf::Vector2f pos, sf::Vector2f tam,ID id ):
+			Personagem(pos,tam,id),pJogador1(nullptr),pJogador2(nullptr){
 			corpo = new sf::RectangleShape(tam);
-			inicializa();
+			vel = Math::CoordF(0.05f, 0.05f);
 			corpo->setPosition(pos);
 		}
 
 		Inimigo::~Inimigo(){}
 
-		void Inimigo::inicializa() {
-			vel = Math::CoordF(0.05f, 0.05f);
-			corpo->setFillColor(sf::Color::Green);
-		}
-
-		void Inimigo::mover() {
-			sf::Vector2f posJogador = jogador->getPos();
-			sf::Vector2f posInimigo = corpo->getPosition();
-
-			if (fabs(posJogador.x - posInimigo.x) <= 1000.0f && fabs(posJogador.y - posInimigo.y) <= 1000.0f) 
-			{
-				if (posJogador.x - posInimigo.x > 0.0f) {
-					corpo->move(vel.x, 0.0f);
-				}
-				else {
-					corpo->move(-vel.x, 0.0f);
-				}
-				if (posJogador.y - posInimigo.y > 0.0f) {
-					corpo->move(0.0f, vel.y);  
-				}
-				else {
-					corpo->move(0.0f, -vel.y); 
-				}
+		void Inimigo::setJogadores(Jogador* j1, Jogador* j2) {
+			pJogador1 = j1;
+			if (j2) {
+			pJogador2 = j2;
 			}
-
 		}
 
-		void Inimigo::executar() {
-			mover();
-			pColisao->notificar(this);
+		void Inimigo::set_nivelMaldade(int nv) {
+			nivel_maldade = nv;
 		}
+
+		int Inimigo::get_nivelMaldade() {
+			return nivel_maldade;
+		}
+		
+		Jogador* Inimigo::jogadorMaisProximo() {
+			Math::CoordF d1 = fabs(posicao.x - pJogador1->getPosition().x);
+			Math::CoordF d2 = fabs(posicao.x - pJogador2->getPosition().x);
+			return (d1.x > d2.x ? pJogador2 : pJogador1);
+		}
+		
 	}
 }

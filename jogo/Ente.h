@@ -4,7 +4,10 @@ enum ID {
 	vazio = 0,
 	jogador,
 	inimigo,
-	plataforma
+	plataforma,
+	arbusto,
+	fogueira,
+	goblin,
 };
 
 class Ente{

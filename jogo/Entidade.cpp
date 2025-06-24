@@ -5,15 +5,45 @@ namespace Entidades {
 
 	//Gerenciadores::GerenciadorDeColisoes* Entidade::pColisao = Gerenciadores::GerenciadorDeColisoes::getInstancia();
 	Gerenciadores::GerenciadorDeColisoes* Entidade::pColisao = Gerenciadores::GerenciadorDeColisoes::getInstancia();
-	Entidade::Entidade(const sf::Vector2f pos, const sf::Vector2f tam,ID id):Ente(id),posicao(pos),tamanho(tam),sprite(nullptr)
+	Entidade::Entidade(const sf::Vector2f pos, const sf::Vector2f tam,ID id):Ente(id),posicao(pos),tamanho(tam),sprite(nullptr),noChao(false)
 	{
+		if (pGrafico && corpo) {
+			pGrafico->renderizar(corpo);
+		}
 		
-		corpo->setOrigin(tam.x / 2.0f, tam.y / 2.0f);
-		corpo->setPosition(posicao);
 	}
+		
+
 	Entidade::~Entidade(){
 		if (sprite) {
 			delete sprite;
+		}
+	}
+	void Entidade::setVelX(float vx) {
+		vel.x = vx;
+	}
+
+	void Entidade::setVelY(float vy) {
+		vel.y = vy;
+	}
+
+	Math::CoordF Entidade::getVel() const {
+		return vel;
+	}
+
+	void Entidade::mover() {
+		if (!getNoChao()) {
+			cair();
+		}
+		Math::CoordF deslocamento = vel * pGrafico->getDeltaTempo();
+		sf::Vector2f nPos = getPos() + sf::Vector2f(deslocamento.x, deslocamento.y);
+		setPosicao(nPos);
+	}
+
+	void Entidade::cair() {
+		setVelY(getVel().y + GRAVIDADE * pGrafico->getDeltaTempo());
+		if (this->getID() == ID::plataforma) {
+			setVelY(getVel().y + EMPUXO * pGrafico->getDeltaTempo());
 		}
 	}
 
@@ -42,6 +72,14 @@ namespace Entidades {
 
 	void Entidade::setTamanho(sf::Vector2f t) {
 		tamanho = t;
+	}
+
+	void Entidade::setNoChao(const bool c) {
+		noChao = c;
+	}
+
+	bool Entidade::getNoChao() {
+		return noChao;
 	}
 
 	Math::CoordF Entidade::getPosition() const {

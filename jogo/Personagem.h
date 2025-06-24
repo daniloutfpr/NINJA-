@@ -7,26 +7,30 @@ namespace Entidades {
 		class Personagem : public Entidade
 		{
 		protected:
-			Math::CoordF vel;
 			bool pular;
 			 //Gerenciadores::GerenciadorDeColisoes* pColisao;
 			 int num_vidas;
 			 bool movendo;
 			 bool podeMover;
 			 bool olhaEsquerda;
+			 int dano;
+			 bool vivo;
 
 		public:
 			Personagem(const sf::Vector2f pos, const sf::Vector2f tam,ID id=ID::vazio);
 			~Personagem();
 			//const sf::RectangleShape& getCorpo() const;
-			//Math::CoordF getVel() const;
+			Math::CoordF getVel() const;
 			void pulo();
 			bool getPulo() const;
 			void setPulo(const bool p);
 			bool getPodeMover();
 			void pararDeMover();
-			void setVelX(float vx);
-			void setVelY(float vy);
+			void setnum_vidas(int vidas);
+			int getnum_vidas();
+			void setvivo(bool v);
+			int getDano();
+			virtual void receberDano(float dano);
 			virtual void atualizarSprite(float dt) = 0;
 			virtual void carregaTexturas() = 0;
 			virtual void mover(bool esquerda) = 0;

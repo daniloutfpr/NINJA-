@@ -130,16 +130,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animacao.cpp" />
+    <ClCompile Include="Arbusto.cpp" />
     <ClCompile Include="ControleJogador.cpp" />
     <ClCompile Include="Coord.cpp" />
     <ClCompile Include="Ente.cpp" />
     <ClCompile Include="Entidade.cpp" />
     <ClCompile Include="Fase.cpp" />
     <ClCompile Include="Floresta.cpp" />
+    <ClCompile Include="Fogueira.cpp" />
     <ClCompile Include="GerenciadorDeColisoes.cpp" />
     <ClCompile Include="GerenciadorDeEventos.cpp" />
     <ClCompile Include="GerenciadorDeInput.cpp" />
     <ClCompile Include="GerenciadorGrafico.cpp" />
+    <ClCompile Include="Goblin.cpp" />
     <ClCompile Include="Inimigo.cpp" />
     <ClCompile Include="Jogador.cpp" />
     <ClCompile Include="jogo.cpp" />
@@ -155,16 +158,19 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animacao.h" />
+    <ClInclude Include="Arbusto.h" />
     <ClInclude Include="ControleJogador.h" />
     <ClInclude Include="Coord.h" />
     <ClInclude Include="Ente.h" />
     <ClInclude Include="Entidade.h" />
     <ClInclude Include="Fase.h" />
     <ClInclude Include="Floresta.h" />
+    <ClInclude Include="Fogueira.h" />
     <ClInclude Include="GerenciadorDeColisoes.h" />
     <ClInclude Include="GerenciadorDeEventos.h" />
     <ClInclude Include="GerenciadorDeInput.h" />
     <ClInclude Include="GerenciadorGrafico.h" />
+    <ClInclude Include="Goblin.h" />
     <ClInclude Include="Inimigo.h" />
     <ClInclude Include="Jogador.h" />
     <ClInclude Include="Lista.h" />
@@ -179,11 +185,13 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\Mini Ninja Game Sprite\PNG\MN_NINJA\01-Idle\MN_NINJA_Idle_001.png" />
+    <Image Include="arbusto.png" />
     <Image Include="C:\Users\danil\Downloads\ninja_attack.png" />
     <Image Include="C:\Users\danil\Downloads\ninja_fall.png" />
     <Image Include="C:\Users\danil\Downloads\ninja_hurt.png" />
     <Image Include="C:\Users\danil\Downloads\ninja_idle.png" />
     <Image Include="C:\Users\danil\Downloads\ninja_walk.png" />
+    <Image Include="fogueira.png" />
     <Image Include="mapa_floresta.png" />
     <Image Include="ninja_idle.png" />
   </ItemGroup>

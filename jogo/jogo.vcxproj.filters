@@ -84,6 +84,15 @@
     <ClCompile Include="Mediator.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
+    <ClCompile Include="Goblin.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="Arbusto.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="Fogueira.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Principal.h">
@@ -152,6 +161,15 @@
     <ClInclude Include="Mediator.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
+    <ClInclude Include="Goblin.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="Arbusto.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="Fogueira.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\Mini Ninja Game Sprite\PNG\MN_NINJA\01-Idle\MN_NINJA_Idle_001.png">
@@ -176,6 +194,12 @@
       <Filter>Arquivos de Recurso</Filter>
     </Image>
     <Image Include="mapa_floresta.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="arbusto.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="fogueira.png">
       <Filter>Arquivos de Recurso</Filter>
     </Image>
   </ItemGroup>

@@ -1,4 +1,4 @@
-#include "Plataforma.h"
+#include "Goblin.h"
 namespace Gerenciadores {
 	class Mediator {
 	private:

@@ -1,4 +1,5 @@
 --------INCLUDES JOGO-----------
 
-Coord->GerenciadorGrafico->Ente->Entidade->Lista->ListaDeEntidades->gerenciador_de_colisoes->Personagem->jogador->
-inimigo->obstaculo->plataforma->principal
+Coord->GerenciadorGrafico->Ente->Animacao->Entidade->Lista->ListaDeEntidades->Personagem->jogador->
+inimigo->obstaculo->plataforma->Mediator->gerenciador_de_colisoes->Observer->Subject->GerenciadorDeInput->
+GerenciadorDeEventos->principal

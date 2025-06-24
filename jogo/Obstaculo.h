@@ -12,8 +12,10 @@ namespace Entidades {
 			Obstaculo(sf::Vector2f pos,sf::Vector2f tam,ID id = ID::vazio);
 			virtual ~Obstaculo();
 			//sf::RectangleShape* getObs();
-			virtual void obstaculizar() = 0;
+			virtual void obstaculizar(Entidades::Personagens::Personagem* pPersonagem) = 0;
 			virtual void executar() = 0;
+			virtual void atualizarSprite(float dt) = 0;
+			virtual void carregaTexturas() = 0;
 			virtual void colidir(Entidade* pEnt ) = 0;
 		};
 	}

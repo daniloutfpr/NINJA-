@@ -12,11 +12,11 @@ namespace ElementosGraficos {
 
 	enum ID_Animacao {
 		idle = 0,
-		mapa = 1,
-		atacando = 2,
-		pulando = 3,
-		ferido = 4,
-		morto = 5,
+		mapa ,
+		arbusto , 
+		fogueira ,
+		atacando ,
+		morto ,
 	};
 
 	class Animacao {
