@@ -59,7 +59,7 @@ namespace Entidades {
 				posicao.x += vel.x * dt;
 				posicao.y += vel.y * dt;
 				setPosicao(posicao);
-
+				//std::cout << "goblin hp:" << getnum_vidas() << std::endl;
 				if (pColisao) {
 					pColisao->notificar(this);
 				}

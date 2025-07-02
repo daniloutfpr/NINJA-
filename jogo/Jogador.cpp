@@ -86,7 +86,7 @@ namespace Entidades {
 				pColisao->notificar(this);
 			}
 			
-			std::cout << "Jogador hp:" << getnum_vidas() << std::endl;
+			//std::cout << "Jogador hp:" << getnum_vidas() << std::endl;
 		
 
 		}
