@@ -2,11 +2,12 @@
 	#include "ControleJogador.h"
 	#include"GerenciadorDeColisoes.h"
 	#include "Fogueira.h"
+	#include "Fase.h"
 namespace Entidades {
 	namespace Personagens {
 		Jogador::Jogador(sf::Vector2f pos,  sf::Vector2f tam,bool ehJogador1,ID id) :Personagem(pos, tam,id),velocidade(PLAYER_VELOCIDADE)
 		{
-			vel = Math::CoordF(10.0f, 10.0f);
+			vel = Math::CoordF(0.0f, 0.0f);
 			Jogador1 = true;
 			//corpo = new sf::RectangleShape(tam);
 			//corpo->setFillColor(sf::Color::Red);
@@ -40,39 +41,46 @@ namespace Entidades {
 				else
 					olhaEsquerda = false;
 			}
+			static_cast<Entidade*>(this)->mover();
 		}
-		
-		void Jogador::verificaInimigosAlcance() {
-			
-
-		}
+	
 
 		void Jogador::atualizar(float dt) {
 
 			//vel = Math::CoordF(0.1f, 0.1f);
-			if (movendo) {
-				if (olhaEsquerda) {
-					setVelX(-velocidade);
+			incrementarTimers(dt);
+			if (!atacando) {
+				if (movendo) {
+					if (olhaEsquerda) {
+						setVelX(-velocidade);
+					}
+					else {
+						setVelX(velocidade);
+					}
 				}
-				else {
-					setVelX(velocidade);
+				else
+				{
+					setVelX(0.0);
 				}
-
 			}
-
 			else
-				setVelX(0.0);
+				setVelX(0.0);//para de andar ao atacar
+
+			if (atacando) {
+				
+				if (timerAtaque > 0.1f) { 
+					verificaInimigosAlcance();
+				}
+			}
 
 			
 			vel.y += GRAVIDADE * dt;
 			posicao.x += vel.x * dt;
-			posicao.y += vel.y * dt;
+			posicao.y += vel.y * dt;	
 			atualizarSprite(dt);
-			this->setPosicao(posicao);
+			setPosicao(posicao);
 			pColisao->notificar(this);
-			atualizarSprite(dt);
-			//this->setPosicao(posicao);
-			//std::cout << posicao.x << std::endl;
+		
 
 		}
 
@@ -84,22 +92,34 @@ namespace Entidades {
 		}
 
 		void Jogador::carregaTexturas() {
-			sprite = new ElementosGraficos::Animacao(corpo, Math::CoordF(0.1, 0.1));
+			sprite = new ElementosGraficos::Animacao(corpo, Math::CoordF(0.1, 0.06));
 
-			sprite->adicionarNovaAnimacao(ElementosGraficos::ID_Animacao::idle, "ninja_idle.png", 12);
-				//sprite->addNewAnimation(GraphicalElements::Animation_ID::idle, "p1_idle.png", 10);
 
+			if (Jogador1) {
+				sprite->adicionarNovaAnimacao(ElementosGraficos::ID_Animacao::idle, "ninja_idle.png", 12);
+
+				sprite->adicionarNovaAnimacao(ElementosGraficos::ID_Animacao::atacando, "ninja_attack.png", 12);
+			}
+			else {
+				sprite->adicionarNovaAnimacao(ElementosGraficos::ID_Animacao::idle, "player2_idle.png", 12);
+				sprite->adicionarNovaAnimacao(ElementosGraficos::ID_Animacao::atacando, "player2_attack.png", 12);
+			}
+			
 			//corpo->setOrigin(tamanho.x / 2 + 15, tamanho.y / 2 - 80);
 
 		}
 
 		void Jogador::atualizarSprite(float dt) {
 			sprite->atualizar(ElementosGraficos::ID_Animacao::idle, !olhaEsquerda, Math::CoordF(posicao.x,posicao.y), dt);
+
+			if (atacando) {
+				sprite->atualizar(ElementosGraficos::ID_Animacao::atacando, olhaEsquerda, Math::CoordF(posicao.x, posicao.y), dt);
+			}
 		}
 
 		void Jogador::colidir(Entidade* pEnt) {
 			if (pEnt->getID() == ID::inimigo) {
-				std::cout << "Jogador Ira atacar ou sofrer dano!" << std::endl;
+				receberDano(dynamic_cast<Entidades::Personagens::Inimigos::Inimigo*>(pEnt)->getDano());
 			}
 		}
 
@@ -108,5 +128,49 @@ namespace Entidades {
 			vel *= lent;
 			setVelX(vel.x);
 		}
+
+		void Jogador::verificaInimigosAlcance() {
+				// Supondo que você tenha um pFase no seu Jogador
+				if (!pFase) return;
+				Lista::ListaDeEntidades* lista = pFase->getListaEntidades();
+
+				for (auto it = lista->begin(); it != lista->end(); ++it) {
+					if (auto* inimigo = dynamic_cast<Inimigos::Inimigo*>(*it)) {
+						if (inimigo->getVivo()) {
+							float jogadorX = getPos().x;
+							float jogadorY = getPos().y;
+							float inimigoX = inimigo->getPos().x;
+							float inimigoY = inimigo->getPos().y;
+
+							// Define a área de ataque
+							float alcanceX = 60.f;
+							float alcanceY = 50.f;
+
+							bool naAltura = fabs(jogadorY - inimigoY) <= alcanceY;
+
+							if (!olhaEsquerda) { // Olhando para a direita
+								bool naDistancia = (inimigoX > jogadorX) && (inimigoX - jogadorX < alcanceX);
+								if (naAltura && naDistancia) {
+									inimigo->receberDano(getDano());
+								}
+							}
+							else { // Olhando para a esquerda
+								bool naDistancia = (inimigoX < jogadorX) && (jogadorX - inimigoX < alcanceX);
+								if (naAltura && naDistancia) {
+									inimigo->receberDano(getDano());
+								}
+							}
+						}
+					}
+				}
+			}
+		
+
+		void Jogador::atacar() {
+			if (getPodeAtacar()) {
+				atacando = true;
+			}
+		}
+		
 	}
 }

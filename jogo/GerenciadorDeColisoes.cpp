@@ -26,42 +26,32 @@ namespace Gerenciadores {
     // Funcoes auxiliares
     // ============================================================================
 
-    float GerenciadorDeColisoes::calcOverlapVert(
-        const Entidades::Entidade* e1, const Entidades::Entidade* e2) const {
-        if (e1 && e2) {
-            float distY = std::abs((e1->getPos().y + e1->getTamanho().y / 2.f) -
-                (e2->getPos().y + e2->getTamanho().y / 2.f));
-            float distColisaoY =
-                (e1->getTamanho().y / 2.f) + (e2->getTamanho().y / 2.f);
+    float GerenciadorDeColisoes::calcOverlapVert(const Entidades::Entidade* e1, const Entidades::Entidade* e2) const {
+        if (!e1 || !e2) return 0.f;
 
-            if (distColisaoY - distY > 0)
-                return distColisaoY - distY;
-            return 0;
+        // Como getPos() JÁ retorna o centro, a distância entre os centros é simples
+        float distCentrosY = std::abs(e1->getPos().y - e2->getPos().y);
 
-        }
-        else {
-            std::cerr << "erro: GerenciadorDeColisoes::calcOverlapVert(...)\n";
-            exit(EXIT_FAILURE);
-        }
+        // A soma das "meias alturas"
+        float somaMeiasAlturas = (e1->getTamanho().y / 2.f) + (e2->getTamanho().y / 2.f);
+
+        // Se a distância entre os centros for MENOR que a soma das meias alturas, há colisão.
+        float overlap = somaMeiasAlturas - distCentrosY;
+        return (overlap > 0) ? overlap : 0.f; // Retorna o valor da sobreposição, ou 0 se não houver.
     }
 
-    float GerenciadorDeColisoes::calcOverlapHor(const Entidades::Entidade* e1,
-        const Entidades::Entidade* e2) const {
-        if (e1 && e2) {
-            float distX = std::abs((e1->getPos().x + e1->getTamanho().x / 2.f) -
-                (e2->getPos().x + e2->getTamanho().x / 2.f));
-            float distColisaoX =
-                (e1->getTamanho().x / 2.f) + (e2->getTamanho().x / 2.f);
+    // Versão corrigida que assume que getPos() retorna o CENTRO
+    float GerenciadorDeColisoes::calcOverlapHor(const Entidades::Entidade* e1, const Entidades::Entidade* e2) const {
+        if (!e1 || !e2) return 0.f;
 
-            if (distColisaoX - distX > 0)
-                return distColisaoX - distX;
-            return 0;
+        // Distância entre os centros no eixo X
+        float distCentrosX = std::abs(e1->getPos().x - e2->getPos().x);
 
-        }
-        else {
-            std::cerr << "erro: GerenciadorDeColisoes::calcOverlapHor(...)\n";
-            exit(EXIT_FAILURE);
-        }
+        // A soma das "meias larguras"
+        float somaMeiasLarguras = (e1->getTamanho().x / 2.f) + (e2->getTamanho().x / 2.f);
+
+        float overlap = somaMeiasLarguras - distCentrosX;
+        return (overlap > 0) ? overlap : 0.f;
     }
 
     sf::Vector2f GerenciadorDeColisoes::calcOverlap(
@@ -112,63 +102,7 @@ namespace Gerenciadores {
             verificarJog(sender);
     }
 
-    // ============================================================================
-    // Funcao para verificar se projetil colidiu com jogador, inimigo ou obstaculo
-    // ============================================================================
 
-   /* void GerenciadorDeColisoes::verificarProj(Entidades::Entidade* pEnt) {
-        if (pEnt == nullptr) {
-            std::cerr << "erro: GerenciadorDeColisoes::verificarProj(...)\n";
-            exit(EXIT_FAILURE);
-        }
-
-        std::set<Entidades::Personagens::Jogador*>::iterator jogIt;
-        std::set<Entidades::Personagens::Inimigos::Inimigo*>::iterator inimIt;
-        std::set<Entidades::Obstaculos::Obstaculo*>::iterator obstIt;
-
-        // Detectar colisao projetil-jogador
-        for (jogIt = jogadores.begin(); jogIt != jogadores.end(); jogIt++) {
-            if (*jogIt) {
-                if (colidiu(pEnt, *jogIt)) {
-                    (*jogIt)->colidir(pEnt);
-                    pEnt->colidir();
-                }
-            }
-            else {
-                std::cerr << "erro: GerenciadorDeColisoes::verificarProj(...)\n";
-                exit(EXIT_FAILURE);
-            }
-        }
-
-        // Detectar colisao projetil-inimigo
-        for (inimIt = inimigos.begin(); inimIt != inimigos.end(); inimIt++) {
-            if (*inimIt) {
-                if (colidiu(pEnt, *inimIt)) {
-                    (*inimIt)->colidir(pEnt);
-                    pEnt->colidir();
-                }
-            }
-            else {
-                std::cerr << "erro: GerenciadorDeColisoes::verificarProj(...)\n";
-                exit(EXIT_FAILURE);
-            }
-        }
-
-        // Detectar colisao projetil-obstaculo
-        for (obstIt = obstaculos.begin(); obstIt != obstaculos.end(); obstIt++) {
-            if (*obstIt) {
-                if (colidiu(pEnt, *obstIt)) {
-                    pEnt->colidir();
-                }
-            }
-            else {
-                std::cerr << "erro: GerenciadorDeColisoes::verificarProj(...)\n";
-                exit(EXIT_FAILURE);
-            }
-        }
-    }
-
-    */
     // ============================================================================
     // Funcao para verificar se inimigo colidiu com jogador ou obstaculo
     // ============================================================================
@@ -250,7 +184,7 @@ namespace Gerenciadores {
             jogadores.insert(pJog);
     }
 
-    void GerenciadorDeColisoes::incluirInim(Entidades::Personagens::Inimigo* pInim) {
+    void GerenciadorDeColisoes::incluirInim(Entidades::Personagens::Inimigos::Inimigo* pInim) {
         if (pInim)
             inimigos.insert(pInim);
     }
@@ -261,24 +195,20 @@ namespace Gerenciadores {
             obstaculos.insert(pObst);
     }
 
-    //void GerenciadorDeColisoes::incluirProj(Projetil* pProj) {
-       // if (pProj)
-          //  projeteis.insert(pProj);
-   // }
+  
 
     void GerenciadorDeColisoes::limparEntidades() {
         jogadores.clear();
         inimigos.clear();
         obstaculos.clear();
-       // projeteis.clear();
+      
     }
 
     void GerenciadorDeColisoes::removerEnt(Entidades::Entidade* pEnt) {
         ID id = pEnt->getID();
 
         if (id==inimigo) {
-           Entidades::Personagens::Inimigo* aux =
-                dynamic_cast<Entidades::Personagens::Inimigo*>(pEnt);
+           Entidades::Personagens::Inimigos::Inimigo* aux =dynamic_cast<Entidades::Personagens::Inimigos::Inimigo*>(pEnt);
 
             inimigos.erase(aux);
 
@@ -288,10 +218,7 @@ namespace Gerenciadores {
             jogadores.erase(aux);
         }
 
-       // else if (ehProjetil(id)) {
-         //   Projetil* aux = dynamic_cast<Projetil*>(pEnt);
-           // projeteis.erase(aux);
-        //}
+       
     }
 
 }

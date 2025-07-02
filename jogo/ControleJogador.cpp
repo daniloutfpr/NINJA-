@@ -5,28 +5,24 @@ namespace Gerenciadores {
 
         moverDireita = sf::Keyboard::Unknown;
         moverEsquerda = sf::Keyboard::Unknown;
-       // atacar = sf::Keyboard::Unknown;
+        atacar = sf::Keyboard::Unknown;
         pular = sf::Keyboard::Unknown;
-       // defender = sf::Keyboard::Unknown;
-       // usarPocao = sf::Keyboard::Unknown;
-        //pausar = sf::Keyboard::Escape;
+     
 
         if (pJogador) {
             if (pJogador->getJogador1()) {
                 moverDireita = sf::Keyboard::D;
                 moverEsquerda = sf::Keyboard::A;
                 pular = sf::Keyboard::W;
-                //atacar = sf::Keyboard::Q;
-                //defender = sf::Keyboard::E;
-                //usarPocao = sf::Keyboard::Z;
+                atacar = sf::Keyboard::Q;
+                
             }
             else {
                 moverDireita = sf::Keyboard::L;
                 moverEsquerda = sf::Keyboard::J;
                 pular = sf::Keyboard::I;
-                //atacar = sf::Keyboard::U;
-                //defender = sf::Keyboard::O;
-                //usarPocao = sf::Keyboard::N;
+                atacar = sf::Keyboard::U;
+               
             }
         }
     }
@@ -36,7 +32,7 @@ namespace Gerenciadores {
     }
 
     void ControleJogador::notificaTeclaPressionada(sf::Keyboard::Key tecla) {
-        std::cout << "Tecla pressionada detectada: " << tecla << std::endl;
+        
         if (tecla == moverDireita) {
             if (pJogador->getPodeMover()) {
                 pJogador->mover(false);
@@ -52,6 +48,10 @@ namespace Gerenciadores {
             if (pJogador->getPulo()) {
                 pJogador->pulo();
             }
+        }
+
+        if (tecla == atacar) {
+            pJogador->atacar();
         }
    }
 

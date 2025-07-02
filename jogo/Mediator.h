@@ -1,4 +1,4 @@
-#include "Goblin.h"
+#include "Mago.h"
 namespace Gerenciadores {
 	class Mediator {
 	private:

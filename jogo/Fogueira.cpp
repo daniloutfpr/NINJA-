@@ -15,7 +15,7 @@ namespace Entidades {
 			atualizarSprite(pGrafico->getDeltaTempo());
 			corpo->setPosition(posicao.x, posicao.y);
 			pColisao->notificar(this);
-			mover();
+			//mover();
 			renderiza();
 		}
 
@@ -40,7 +40,7 @@ namespace Entidades {
 		}
 
 		void Fogueira::carregaTexturas() {
-			sprite = new ElementosGraficos::Animacao(corpo, Math::CoordF(2, 2));
+			sprite = new ElementosGraficos::Animacao(corpo, Math::CoordF(1.0,0.8));
 
 			sprite->adicionarNovaAnimacao(ElementosGraficos::ID_Animacao::fogueira, "fogueira.png", 12);
 		}

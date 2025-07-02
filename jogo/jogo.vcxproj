@@ -148,6 +148,7 @@
     <ClCompile Include="jogo.cpp" />
     <ClCompile Include="Lista.cpp" />
     <ClCompile Include="ListaDeEntidades.cpp" />
+    <ClCompile Include="Mago.cpp" />
     <ClCompile Include="Mediator.cpp" />
     <ClCompile Include="Observer.cpp" />
     <ClCompile Include="Obstaculo.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="Jogador.h" />
     <ClInclude Include="Lista.h" />
     <ClInclude Include="ListaDeEntidades.h" />
+    <ClInclude Include="Mago.h" />
     <ClInclude Include="Mediator.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="Obstaculo.h" />
@@ -192,11 +194,18 @@
     <Image Include="C:\Users\danil\Downloads\ninja_idle.png" />
     <Image Include="C:\Users\danil\Downloads\ninja_walk.png" />
     <Image Include="fogueira.png" />
+    <Image Include="goblin_attack.png" />
+    <Image Include="goblin_idle.png" />
     <Image Include="mapa_floresta.png" />
     <Image Include="ninja_idle.png" />
+    <Image Include="player2_attack.png" />
+    <Image Include="player2_idle.png" />
+    <Image Include="wizard_attack.png" />
+    <Image Include="wizard_idle.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="mapa_floresta.json" />
+    <None Include="mapa_floresta2.0.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -5,6 +5,7 @@ namespace Entidades {
 	namespace Obstaculos {
 		Arbusto::Arbusto(sf::Vector2f pos, sf::Vector2f tam, ID id) :lentidao(LENTIDAO),Obstaculo(pos,tam,id) {
 			carregaTexturas();
+			danoso = false;
 		}
 
 		Arbusto::~Arbusto() {
@@ -23,8 +24,8 @@ namespace Entidades {
 			atualizarSprite(pGrafico->getDeltaTempo());
 			corpo->setPosition(posicao.x, posicao.y);
 			pColisao->notificar(this);
-			renderiza();
-			mover();
+			//renderiza();
+			//mover();
 		}
 
 		void Arbusto::colidir(Entidade* pE) {
@@ -38,7 +39,7 @@ namespace Entidades {
 		}
 
 		void Arbusto::carregaTexturas() {
-			sprite = new ElementosGraficos::Animacao(corpo,Math::CoordF(2.2, 2.2));
+			sprite = new ElementosGraficos::Animacao(corpo,Math::CoordF(0.7, 1.0));
 
 			sprite->adicionarNovaAnimacao(ElementosGraficos::ID_Animacao::arbusto, "arbusto.png", 1);
 		}

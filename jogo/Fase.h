@@ -13,8 +13,9 @@ namespace Fases {
 		ElementosGraficos::Animacao* spriteMapa;
 		Lista::ListaDeEntidades* lJogadores;
 		Lista::ListaDeEntidades* lObstaculos;
-		//Lista::ListaDeEntidades* lInimigos;
-		//Lista::ListaDeEntidades* lProjeteis;
+		Lista::ListaDeEntidades* lInimigos;
+		Entidades::Personagens::Jogador* pJogador1;
+		Entidades::Personagens::Jogador* pJogador2;
 		Gerenciadores::GerenciadorGrafico* pGrafico;
 		Gerenciadores::GerenciadorDeColisoes* pColisoes;
 		Entidades::Personagens::Jogador* pJogador;
@@ -23,7 +24,7 @@ namespace Fases {
 		Fase();
 		virtual ~Fase();
 		void criarFase(const char* caminho_arquivo);
-		//Lista::ListaDeEntidades* getListaEntidades();
+		Lista::ListaDeEntidades* getListaEntidades();
 		void executar();
 
 	};

@@ -8,6 +8,7 @@ enum ID {
 	arbusto,
 	fogueira,
 	goblin,
+	mago
 };
 
 class Ente{

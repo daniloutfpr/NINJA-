@@ -4,19 +4,16 @@ namespace Entidades {
 	namespace Obstaculos {
 
 		Plataforma::Plataforma(sf::Vector2f pos, sf::Vector2f tam, ID id)
-			: Obstaculo(pos, tam, id), empuxo(EMPUXO) {
+			: Obstaculo(pos, tam, id), empuxo(0.0f,0.0f) {
 			//std::cout << "construto da plataforma!" << endl;
 			//corpo = new sf::RectangleShape(tam);
-			inicializa();
+		
 			//corpo->setPosition(pos);
 			
 		}
 
 		Plataforma::~Plataforma() {
-			
-		}
-		void Plataforma::inicializa() {
-			corpo->setFillColor(sf::Color::Blue);
+
 		}
 
 		void Plataforma::obstaculizar(Entidades::Personagens::Personagem* pPersonagem) {
@@ -41,17 +38,22 @@ namespace Entidades {
 				if (pPersonagem->getPos().y < this->getPos().y) {  // Direção da colisão
 					novaPos.y -= ds.y;                        // Caindo
 					pPersonagem->setNoChao(true);
+					pPersonagem->setPulo(true);
 				}
 				else
 					novaPos.y += ds.y;
+				
 				pPersonagem->setVelY(0.f);
+				
 			}
+			
 			pPersonagem->setPosicao(novaPos);
 		}
 
 		void Plataforma::executar() {
 			pColisao->notificar(this);
-			mover();
+			//mover();
+			renderiza();
 		}
 
 		void Plataforma::colidir(Entidade* pEnt) {

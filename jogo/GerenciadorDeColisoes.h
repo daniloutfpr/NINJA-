@@ -27,9 +27,9 @@ namespace Gerenciadores {
 			static GerenciadorDeColisoes* instancia;
 
 			std::set<Entidades::Personagens::Jogador*> jogadores;
-			std::set<Entidades::Personagens::Inimigo*> inimigos;
+			std::set<Entidades::Personagens::Inimigos::Inimigo*> inimigos;
 			std::set<Entidades::Obstaculos::Obstaculo*> obstaculos;
-			//std::set<Entidades::Projetil*> projeteis;
+		;
 
 		private:
 			GerenciadorDeColisoes();
@@ -37,8 +37,7 @@ namespace Gerenciadores {
 			GerenciadorDeColisoes(const GerenciadorDeColisoes&) = delete;
 			GerenciadorDeColisoes& operator=(const GerenciadorDeColisoes&) = delete;
 
-			// Funcoes para verificar colisoes de cada caso de entidade
-			//void verificarProj(Entidades::Entidade* pEnt);
+			
 			void verificarInim(Entidades::Entidade* pEnt);
 			void verificarJog(Entidades::Entidade* pEnt);
 
@@ -62,9 +61,8 @@ namespace Gerenciadores {
 			void limparEntidades();
 
 			void incluirJog(Entidades::Personagens::Jogador* pJog);
-			void incluirInim(Entidades::Personagens::Inimigo* pInim);
+			void incluirInim(Entidades::Personagens::Inimigos::Inimigo* pInim);
 			void incluirObst(Entidades::Obstaculos::Obstaculo* pObst);
-			//void incluirProj(Entidades::Projetil* pProj);
 			void removerEnt(Entidades::Entidade* pEnt);
 	};
 }

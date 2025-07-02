@@ -1,5 +1,5 @@
 --------INCLUDES JOGO-----------
 
 Coord->GerenciadorGrafico->Ente->Animacao->Entidade->Lista->ListaDeEntidades->Personagem->jogador->
-inimigo->obstaculo->plataforma->Mediator->gerenciador_de_colisoes->Observer->Subject->GerenciadorDeInput->
-GerenciadorDeEventos->principal
+inimigo->obstaculo->plataforma->Arbusto->Fogueira->Goblin->Mago->Mediator->gerenciador_de_colisoes->Observer->Subject->GerenciadorDeInput->
+GerenciadorDeEventos->Fase->principal

@@ -1,9 +1,13 @@
 #pragma once
 #include "Personagem.h"
 
-#define PLAYER_VELOCIDADE 500.0f
+#define PLAYER_VELOCIDADE 200.0f
 #define PLAYER_VIDA 100.0f
 #define DANO_PLAYER 20.0f
+
+namespace Fases {
+	class Fase;
+}
 namespace Gerenciadores {
 	class ControleJogador;
 }
@@ -25,12 +29,15 @@ namespace Entidades {
 			bool Jogador1;
 			float velocidade;
 			Entidades::Obstaculos::Fogueira* pFog;
+			Fases::Fase* pFase;
+
 		public:
 			Jogador(sf::Vector2f pos = sf::Vector2f(0.0f,0.0f), sf::Vector2f tam= sf::Vector2f(0.1f,0.1f),bool ehJogador1=true , ID id = ID::jogador);
 			~Jogador();
 			const bool getJogador1()const;
 			void sofrerLentidao(float lent);
 			//void sofrerDano(float dano);
+			void atacar();
 			void mover(bool esquerda);
 			void executar();
 			void atualizar(float dt);

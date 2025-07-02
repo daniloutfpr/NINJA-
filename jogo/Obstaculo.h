@@ -4,7 +4,7 @@ namespace Entidades {
 	namespace Obstaculos {
 		class Obstaculo:public Entidade
 		{
-		private:
+		protected:
 			//sf::RectangleShape *obstaculo1;
 			//void inicializa();
 			bool danoso;
