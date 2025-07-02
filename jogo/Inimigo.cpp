@@ -29,6 +29,12 @@ namespace Entidades {
 			}
 
 			Jogador* Inimigo::jogadorMaisProximo() {
+				if (pJogador1 && !pJogador2)
+					return pJogador1;
+				if (!pJogador1 && pJogador2)
+					return pJogador2;
+				if (!pJogador1 && !pJogador2)
+					return nullptr;
 
 
 				Math::CoordF d1 = fabs(posicao.x - pJogador1->getPosition().x);

@@ -18,16 +18,14 @@ namespace Entidades {
 			 float tempoAtaque;
 			 int dano;
 			 bool vivo;
-			// bool atacando;
-			 float cooldownAtaque;      
-			 //float tempoAtaque;         
+			 float cooldownAtaque;           
 			 float timerAtaque;        
 			 float timerCooldown;
 
 		public:
 			Personagem(const sf::Vector2f pos, const sf::Vector2f tam,ID id=ID::vazio);
 			~Personagem();
-			//const sf::RectangleShape& getCorpo() const;
+			
 			Math::CoordF getVel() const;
 			void pulo();
 			bool getPulo() const;
@@ -47,12 +45,9 @@ namespace Entidades {
 			void incrementarTimers(float dt);
 			virtual void atualizarSprite(float dt) = 0;
 			virtual void carregaTexturas() = 0;
-			//virtual void mover(bool esquerda) = 0;
 			virtual void executar() = 0 ;
 			virtual void atualizar(float dt) = 0;
 			virtual void colidir(Entidade* pEnt ) = 0;
-			//virtual void executar() = 0;
-
 		};
 	}
 }

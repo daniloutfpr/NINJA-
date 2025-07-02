@@ -1,7 +1,7 @@
 #include "Goblin.h"
 #include"GerenciadorDeColisoes.h"
 #define GOBLIN_VELOCIDADE 80.0f
-#define GOBLIN_ALCANCE_VISAO 400.0f
+#define GOBLIN_ALCANCE_VISAO 200.0f
 #define GOBLIN_ALCANCE_ATAQUE 40.0f
 namespace Entidades {
 	namespace Personagens {
@@ -74,20 +74,22 @@ namespace Entidades {
 
 			void Goblin::colidir(Entidade* outraEntidade) {
 
-				// Lógica específica do Goblin: causar dano por toque no jogador
 				if (outraEntidade->getID() == ID::jogador) {
-					static_cast<Jogador*>(outraEntidade)->receberDano(getDano());
+					if (auto* pJogador = dynamic_cast<Personagens::Jogador*>(outraEntidade)) {
+						
+						pJogador->receberDano(getDano());
+					}
 				}
 			}
 
 			void Goblin::carregaTexturas() {
-				//if (corpo) corpo->setSize(tamanho);
 				
-				sprite = new ElementosGraficos::Animacao(corpo, Math::CoordF(0.3f, 0.3f));
+				
+				sprite = new ElementosGraficos::Animacao(corpo, Math::CoordF(0.1f, 0.1f));
 
-				sprite->adicionarNovaAnimacao(ElementosGraficos::ID_Animacao::idle, "goblin_idle.png", 6);
+				sprite->adicionarNovaAnimacao(ElementosGraficos::ID_Animacao::idle, "goblin_idle.png", 8);
 
-				sprite->adicionarNovaAnimacao(ElementosGraficos::ID_Animacao::atacando, "goblin_attack.png", 6);
+				sprite->adicionarNovaAnimacao(ElementosGraficos::ID_Animacao::atacando, "goblin_attack.png", 8);
 			}
 
 			void Goblin::atualizarSprite(float dt) {

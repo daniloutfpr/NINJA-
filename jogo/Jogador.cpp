@@ -15,7 +15,7 @@ namespace Entidades {
 			//corpo->setPosition(pos);
 			pControle = new Gerenciadores::ControleJogador(this);
 			pFog = new Entidades::Obstaculos::Fogueira((sf::Vector2f(0, 0), (sf::Vector2f(0, 0))));
-
+			estaLento = false;
 			carregaTexturas();
 			setnum_vidas(PLAYER_VIDA);
 		}
@@ -72,23 +72,29 @@ namespace Entidades {
 					verificaInimigosAlcance();
 				}
 			}
-
+			if (estaLento) {
+				setVelX(velocidade * 0.1);
+			}
 			
 			vel.y += GRAVIDADE * dt;
 			posicao.x += vel.x * dt;
 			posicao.y += vel.y * dt;	
 			atualizarSprite(dt);
 			setPosicao(posicao);
-			pColisao->notificar(this);
+			if (pColisao) {
+				//std::cout << "Jogador na pos Y: " << posicao.y << " -- Enviando notificacao..." << std::endl;
+				pColisao->notificar(this);
+			}
+			
+			std::cout << "Jogador hp:" << getnum_vidas() << std::endl;
 		
 
 		}
 
 		void Jogador::executar() {
-			//mover();
+			
 			atualizar(pGrafico->getDeltaTempo());
-			//std::cout << "Player posy:" << this->getPos().y <<  std::endl;
-			//pColisao->notificaColisao(this, pGrafico->getDeltaTempo());
+			
 		}
 
 		void Jogador::carregaTexturas() {
@@ -105,7 +111,7 @@ namespace Entidades {
 				sprite->adicionarNovaAnimacao(ElementosGraficos::ID_Animacao::atacando, "player2_attack.png", 12);
 			}
 			
-			//corpo->setOrigin(tamanho.x / 2 + 15, tamanho.y / 2 - 80);
+			
 
 		}
 
@@ -118,15 +124,20 @@ namespace Entidades {
 		}
 
 		void Jogador::colidir(Entidade* pEnt) {
-			if (pEnt->getID() == ID::inimigo) {
+			if (pEnt->getID() == ID::goblin || pEnt->getID() == ID::mago) {
 				receberDano(dynamic_cast<Entidades::Personagens::Inimigos::Inimigo*>(pEnt)->getDano());
 			}
+			else if (pEnt->getID() == ID::arbusto) {
+				sofrerLentidao();
+			}
+			else if (pEnt->getID() == ID::fogueira) {
+				receberDano(pFog->getDanoPs());
+			}
+
 		}
 
-		void Jogador::sofrerLentidao(float lent) {
-			Math::CoordF vel = getVel();
-			vel *= lent;
-			setVelX(vel.x);
+		void Jogador::sofrerLentidao() {
+			estaLento = true;
 		}
 
 		void Jogador::verificaInimigosAlcance() {

@@ -3,17 +3,12 @@
 
 namespace Entidades {
 
-	//Gerenciadores::GerenciadorDeColisoes* Entidade::pColisao = Gerenciadores::GerenciadorDeColisoes::getInstancia();
+
 	Gerenciadores::GerenciadorDeColisoes* Entidade::pColisao = Gerenciadores::GerenciadorDeColisoes::getInstancia();
-	Entidade::Entidade(const sf::Vector2f pos, const sf::Vector2f tam,ID id):Ente(id),posicao(pos),tamanho(tam),sprite(nullptr),noChao(true)
+	Entidade::Entidade(const sf::Vector2f pos, const sf::Vector2f tam, ID id)
+		: Ente(id), posicao(pos), tamanho(tam), sprite(nullptr), noChao(true)
 	{
-		//if (pGrafico && corpo) {
-			//pGrafico->renderizar(corpo);
-		//}
-		//corpo->setSize(tamanho);
-		corpo->setOrigin(tamanho.x / 2.0f, tamanho.y / 2.0f);
-		corpo->setPosition(posicao);
-		
+	
 	}
 		
 

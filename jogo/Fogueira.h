@@ -1,5 +1,5 @@
 #pragma once
-#define DANO_FOGUEIRA 1.0f
+#define DANO_FOGUEIRA 50.0f
 #define FOGO_INTERVALO 0.5F
 #include "Arbusto.h"
 

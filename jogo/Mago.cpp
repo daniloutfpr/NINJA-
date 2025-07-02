@@ -57,15 +57,28 @@ namespace Entidades {
 					}
 					
 					else {
-						
-						poder = 1.0f;
+						if (dist > 0) { // Jogador à direita
+							setVelX(-MAGO_VELOCIDADE);
+							olhaEsquerda = false;
+						}
+						else { // Jogador à esquerda
+							setVelX(MAGO_VELOCIDADE);
+							olhaEsquerda = true;
+						}
+						movendo = true;
 					}
-				}
-				else {
-					// Reseta o poder se não houver jogador por perto
 					poder = 1.0f;
 				}
+				
+				vel.y += GRAVIDADE * dt;
+				posicao.x += vel.x * dt;
+				posicao.y += vel.y * dt;
+				setPosicao(posicao);
 
+				if (pColisao) {
+					pColisao->notificar(this);
+				}
+				
 				
 				atualizarSprite(dt);
 			}
@@ -75,10 +88,7 @@ namespace Entidades {
 				float danoFinal = getDano() * poder;
 
 				Jogador* pAlvo = jogadorMaisProximo();
-				if (pAlvo) {
-					
-					pAlvo->receberDano(danoFinal);
-				}
+				
 			}
 
 			void Mago::colidir(Entidade* outraEntidade) {
@@ -89,7 +99,7 @@ namespace Entidades {
 
 			void Mago::carregaTexturas() {
 				
-				sprite = new ElementosGraficos::Animacao(corpo, Math::CoordF(0.3f, 0.3f));
+				sprite = new ElementosGraficos::Animacao(corpo, Math::CoordF(0.15f, 0.15f));
 
 				sprite->adicionarNovaAnimacao(ElementosGraficos::ID_Animacao::idle, "wizard_idle.png", 4);
 

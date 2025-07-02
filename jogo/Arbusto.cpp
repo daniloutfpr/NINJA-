@@ -34,12 +34,13 @@ namespace Entidades {
 
 		void Arbusto::obstaculizar(Entidades::Personagens::Personagem* pPersonagem) {
 			if (pPersonagem->getID() == ID::jogador) {
-				dynamic_cast<Entidades::Personagens::Jogador*>(pPersonagem)->sofrerLentidao(lentidao);
+				dynamic_cast<Entidades::Personagens::Jogador*>(pPersonagem)->sofrerLentidao();
+				std::cout << "Aaa" << std::endl;
 			}
 		}
 
 		void Arbusto::carregaTexturas() {
-			sprite = new ElementosGraficos::Animacao(corpo,Math::CoordF(0.7, 1.0));
+			sprite = new ElementosGraficos::Animacao(corpo,Math::CoordF(0.8, 1.7));
 
 			sprite->adicionarNovaAnimacao(ElementosGraficos::ID_Animacao::arbusto, "arbusto.png", 1);
 		}

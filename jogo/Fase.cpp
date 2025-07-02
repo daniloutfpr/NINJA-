@@ -20,16 +20,18 @@ namespace Fases {
         pGrafico = Gerenciadores::GerenciadorGrafico::getInstancia();
         pColisoes = Gerenciadores::GerenciadorDeColisoes::getInstancia();
 
+       // pJogador = new Entidades::Personagens::Jogador();
+
 
         
-        imagemMapa = new sf::RectangleShape(sf::Vector2f(1024.0f, 768.0f));
+        imagemMapa = new sf::RectangleShape(sf::Vector2f(1000.0f, 750.0f));
         imagemMapa->setOrigin(sf::Vector2f(0.0f,0.0f));
         spriteMapa = new ElementosGraficos::Animacao(imagemMapa, Math::CoordF(1, 1));
-        spriteMapa->adicionarNovaAnimacao(ElementosGraficos::ID_Animacao::mapa, "mapa_floresta.png", 1);
+        spriteMapa->adicionarNovaAnimacao(ElementosGraficos::ID_Animacao::mapa, "mapa2.jpeg", 1);
 
 
        
-        criarFase("mapa_floresta.json");
+        criarFase("mapa33.tmj");
             
         
     }
@@ -79,7 +81,7 @@ namespace Fases {
 
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
-                int value = tmjData["layers"][1]["data"][indice++];
+                int value = tmjData["layers"][0]["data"][indice++];
                 float posx = 32 * x;
                 float posy = 32 * y;
 
@@ -127,9 +129,9 @@ namespace Fases {
                 case 5: {
                     auto* tmp = new Entidades::Personagens::Inimigos::Goblin(sf::Vector2f(posx, posy));
                     if (tmp) {
-                        //tmp->setJogadores(pJogador, nullptr);  
-                        //lJogadores->adicionarEntidade(tmp);
-                        lObstaculos->adicionarEntidade(tmp);
+                        tmp->setJogadores(pJogador, nullptr);  
+                        lInimigos->adicionarEntidade(tmp);
+                        //lObstaculos->adicionarEntidade(tmp);
                         pColisoes->incluirInim(tmp);
                     }
                     break;
@@ -137,9 +139,9 @@ namespace Fases {
                 case 6: {
                     auto* tmp = new Entidades::Personagens::Inimigos::Mago(sf::Vector2f(posx, posy));
                     if (tmp) {
-                       // tmp->setJogadores(pJogador, nullptr);  
-                        //lJogadores->adicionarEntidade(tmp);
-                        lObstaculos->adicionarEntidade(tmp);
+                        tmp->setJogadores(pJogador, nullptr);  
+                        lInimigos->adicionarEntidade(tmp);
+                        //lObstaculos->adicionarEntidade(tmp);
                         pColisoes->incluirInim(tmp);
                     }
                     break;
@@ -148,16 +150,11 @@ namespace Fases {
                 }
             }
         }
-        for (auto it = lInimigos->begin(); it != lInimigos->end(); ++it) {
-            auto* pInimigo = dynamic_cast<Entidades::Personagens::Inimigos::Inimigo*>(*it);
-            if (pInimigo) {
-                pInimigo->setJogadores(pJogador1, pJogador2);
-            }
-        }
 
         std::cout << "--- RELATORIO DE CRIACAO DE FASE ---" << std::endl;
         std::cout << "Total de Plataformas criadas: " << lObstaculos->getTam() << std::endl;
-        std::cout << "Total de Jogadores/Inimigos criados: " << lJogadores->getTam() << std::endl;
+        std::cout << "Total de Jogadores " << lJogadores->getTam() << std::endl;
+        std::cout << "Total de Inimigos criados: " << lInimigos->getTam() << std::endl;
         std::cout << "------------------------------------" << std::endl;
     }
 

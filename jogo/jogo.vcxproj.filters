@@ -226,12 +226,21 @@
     <Image Include="wizard_idle.png">
       <Filter>Arquivos de Recurso</Filter>
     </Image>
+    <Image Include="mapa2.jpeg">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="mapa_floresta.json">
       <Filter>Arquivos de Recurso</Filter>
     </None>
     <None Include="mapa_floresta2.0.json">
+      <Filter>Arquivos de Recurso</Filter>
+    </None>
+    <None Include="newmap.json">
+      <Filter>Arquivos de Recurso</Filter>
+    </None>
+    <None Include="mapa33.tmj">
       <Filter>Arquivos de Recurso</Filter>
     </None>
   </ItemGroup>

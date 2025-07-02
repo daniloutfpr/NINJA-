@@ -29,7 +29,7 @@ namespace Gerenciadores {
     float GerenciadorDeColisoes::calcOverlapVert(const Entidades::Entidade* e1, const Entidades::Entidade* e2) const {
         if (!e1 || !e2) return 0.f;
 
-        // Como getPos() JÁ retorna o centro, a distância entre os centros é simples
+        // Como getPos() JÁ retorna o centro, a distância entre os centros é simples.
         float distCentrosY = std::abs(e1->getPos().y - e2->getPos().y);
 
         // A soma das "meias alturas"
@@ -89,13 +89,15 @@ namespace Gerenciadores {
             exit(EXIT_FAILURE);
         }
 
+   
+
       //  std::cout << "Colidindo!" << std::endl;
         ID id = sender->getID();
 
         //if (ehProjetil(id))
             //verificarProj(sender);
 
-         if (id == inimigo)
+         if (id == inimigo||id==goblin||id==mago)
             verificarInim(sender);
 
         else if (id == jogador)
@@ -116,8 +118,8 @@ namespace Gerenciadores {
 
         std::set<Entidades::Personagens::Jogador*>::iterator jogIt;
         std::set<Entidades::Obstaculos::Obstaculo*>::iterator obstIt;
-
-        // Detectar colisao inimigo-jogador
+       
+        
         for (jogIt = jogadores.begin(); jogIt != jogadores.end(); jogIt++) {
             if (*jogIt) {
                 if (colidiu(pEnt, *jogIt)) {
@@ -151,26 +153,24 @@ namespace Gerenciadores {
     // ============================================================================
 
     void GerenciadorDeColisoes::verificarJog(Entidades::Entidade* pEnt) {
-        if (pEnt == nullptr) {
-            std::cerr << "erro: GerenciadorDeColisoes::verificarJog(...)\n";
-            exit(EXIT_FAILURE);
-        }
-        
-        std::set<Entidades::Obstaculos::Obstaculo*>::iterator obstIt;
+        if (!pEnt) return;
 
-       
-        for (obstIt = obstaculos.begin(); obstIt != obstaculos.end(); obstIt++) {
-            
-            if (*obstIt) {
-                if (colidiu(pEnt, *obstIt)) {
-                    // Jogador colide com obstaculo
-                    
-                    (*obstIt)->colidir(pEnt);
-                }
+        // Checa colisão do Jogador com todos os Obstáculos
+        for (auto const& pObst : obstaculos) {
+            if (colidiu(pEnt, pObst)) {
+                sf::Vector2f overlap = calcOverlap(pEnt, pObst);
+                // Avisa o obstáculo (Plataforma, Fogueira, etc) sobre a colisão
+                pObst->colidir(pEnt);
             }
-            else {
-                std::cerr << "erro: GerenciadorDeColisoes::verificarJog(...)\n";
-                exit(EXIT_FAILURE);
+        }
+
+        // Checa colisão do Jogador com todos os Inimigos
+        for (auto const& pInim : inimigos) {
+            if (colidiu(pEnt, pInim)) {
+                sf::Vector2f overlap = calcOverlap(pEnt, pInim);
+                // Avisa AMBOS sobre a colisão, para que possam reagir
+                pEnt->colidir(pInim);
+                pInim->colidir(pEnt);
             }
         }
     }

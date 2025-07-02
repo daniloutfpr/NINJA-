@@ -30,12 +30,12 @@ namespace Entidades {
 			float velocidade;
 			Entidades::Obstaculos::Fogueira* pFog;
 			Fases::Fase* pFase;
-
+			bool estaLento;
 		public:
 			Jogador(sf::Vector2f pos = sf::Vector2f(0.0f,0.0f), sf::Vector2f tam= sf::Vector2f(0.1f,0.1f),bool ehJogador1=true , ID id = ID::jogador);
 			~Jogador();
 			const bool getJogador1()const;
-			void sofrerLentidao(float lent);
+			void sofrerLentidao();
 			//void sofrerDano(float dano);
 			void atacar();
 			void mover(bool esquerda);

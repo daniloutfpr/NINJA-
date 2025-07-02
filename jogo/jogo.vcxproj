@@ -196,6 +196,7 @@
     <Image Include="fogueira.png" />
     <Image Include="goblin_attack.png" />
     <Image Include="goblin_idle.png" />
+    <Image Include="mapa2.jpeg" />
     <Image Include="mapa_floresta.png" />
     <Image Include="ninja_idle.png" />
     <Image Include="player2_attack.png" />
@@ -204,8 +205,10 @@
     <Image Include="wizard_idle.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="mapa33.tmj" />
     <None Include="mapa_floresta.json" />
     <None Include="mapa_floresta2.0.json" />
+    <None Include="newmap.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

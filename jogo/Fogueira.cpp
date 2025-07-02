@@ -5,6 +5,7 @@ namespace Entidades {
 		Fogueira::Fogueira(sf::Vector2f pos, sf::Vector2f tam, ID id) :danoPs(DANO_FOGUEIRA),intervalo_fogo(FOGO_INTERVALO),
 			Obstaculo(pos, tam, id) {
 			carregaTexturas();
+			danoso = true;
 		}
 
 		Fogueira::~Fogueira() {
@@ -20,18 +21,15 @@ namespace Entidades {
 		}
 
 		const int Fogueira::getDanoPs() {
-			intervalo_fogo += pGrafico->getDeltaTempo();
-			if (intervalo_fogo >= FOGO_INTERVALO) {
-				intervalo_fogo = 0;
 				return danoPs;
 			}
 
 
-		}
 
 		void Fogueira::obstaculizar(Entidades::Personagens::Personagem* pPersonagem) {
-			if (pPersonagem->getID() == ID::jogador) {
-				dynamic_cast<Entidades::Personagens::Jogador*>(pPersonagem)->receberDano(getDanoPs());
+			if (pGrafico->getDeltaTempo() > intervalo_fogo) {
+				pPersonagem->receberDano(getDanoPs());
+				std::cout << "Etnra" << std::endl;
 			}
 		}
 		
@@ -40,7 +38,7 @@ namespace Entidades {
 		}
 
 		void Fogueira::carregaTexturas() {
-			sprite = new ElementosGraficos::Animacao(corpo, Math::CoordF(1.0,0.8));
+			sprite = new ElementosGraficos::Animacao(corpo, Math::CoordF(0.8,1.1));
 
 			sprite->adicionarNovaAnimacao(ElementosGraficos::ID_Animacao::fogueira, "fogueira.png", 12);
 		}
